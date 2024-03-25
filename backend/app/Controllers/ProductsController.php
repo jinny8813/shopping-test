@@ -23,9 +23,12 @@ class ProductsController extends BaseController
 
     public function renderProductPage()
     {
+        $productsModel = new ProductsModel();
+        $productsData = $productsModel->findAll();
+
         return $this->respond([
             "status" => true,
-            "data"   => "View ProductPage",
+            "data"   => $productsData,
             "msg"    => "View ProductPage"
         ]);
     }
@@ -34,16 +37,18 @@ class ProductsController extends BaseController
     {
         $data = $this->request->getPost();
 
-        $name      = $data['name'] ?? null;
-        $introduce = $data['introduce'];
-        $price     = $data['price'] ?? null;
-        $quantity  = $data['quantity'] ?? null;
+        $p_name        = $data['name'] ?? null;
+        $p_description = $data['description'] ?? null;
+        $p_price       = $data['price'] ?? null;
+        $p_stock       = $data['stock'] ?? null;
+        $p_image       = $data['image'] ;
+        $p_type        = $data['type'] ?? null;
 
-        if($name === null || $price === null || $quantity === null) {
+        if($p_name === null || $p_description === null || $p_price === null || $p_stock === null || $p_type === null) {
             return $this->fail("需輸入商品完整資訊", 404);
         }
 
-        if($name === " " || $price === " " || $quantity === " ") {
+        if($p_name === " " || $p_description === " " || $p_price === " " || $p_stock === " " || $p_type === " ") {
             return $this->fail("需輸入商品完整資訊", 404);
         }
 
@@ -51,10 +56,12 @@ class ProductsController extends BaseController
         $productsModel = new ProductsModel();
 
         $values = [
-            'p_name'      =>  $name,
-            'p_introduce' =>  $introduce,
-            'p_price'     =>  $price,
-            'p_quantity'  =>  $quantity,
+            'p_name'        =>  $p_name,
+            'p_description' =>  $p_description,
+            'p_price'       =>  $p_price,
+            'p_stock'       =>  $p_stock,
+            'p_image'       =>  $p_image,
+            'p_type'        =>  $p_type,
         ];
         $productsModel->insert($values);
 

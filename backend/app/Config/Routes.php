@@ -48,11 +48,10 @@ $routes->group('/', ['filter' => 'JwtAuth','ApiAccessFilter'], function($routes)
     $routes->get('/editMemberData', 'MemberManage::renderEditMemberDataPage');
     $routes->post('/editMemberData', 'MemberManage::update');
     $routes->delete('/delete', 'MemberManage::delete');
-
-    $routes->get('/product', 'ProductsController::renderProductPage');
-    $routes->post('/product', 'ProductsController::AddProduct');
 });
 
+$routes->get('/product', 'ProductsController::renderProductPage');
+$routes->post('/product', 'ProductsController::AddProduct');
 
 /*
  * --------------------------------------------------------------------
