@@ -50,8 +50,11 @@ $routes->group('/', ['filter' => 'JwtAuth','ApiAccessFilter'], function($routes)
     $routes->delete('/delete', 'MemberManage::delete');
 });
 
-$routes->get('/product', 'ProductsController::renderProductPage');
-$routes->post('/product', 'ProductsController::AddProduct');
+$routes->get('/product', 'ProductsController::showProducts');
+$routes->post('/product', 'ProductsController::addProduct');
+$routes->put('/product/(:num)', 'ProductsController::editProduct/$1');
+$routes->delete('/product/(:num)', 'ProductsController::deleteProduct/$1');
+$routes->get('/product/(:num)', 'ProductsController::showPerProduct/$1');
 
 /*
  * --------------------------------------------------------------------
