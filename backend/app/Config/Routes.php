@@ -50,12 +50,14 @@ $routes->group('/', ['filter' => 'JwtAuth','ApiAccessFilter'], function($routes)
     $routes->delete('/delete', 'MemberManage::delete');
 });
 
-$routes->get('/product', 'ProductsController::showProducts');
-$routes->post('/product', 'ProductsController::addProduct');
-$routes->put('/product/(:num)', 'ProductsController::editProduct/$1');
-$routes->delete('/product/(:num)', 'ProductsController::deleteProduct/$1');
-$routes->get('/product/(:num)', 'ProductsController::showPerProduct/$1');
+$routes->get('/backstage/product', 'BackStage\ProductsController::showProducts');
+$routes->post('/backstage/product', 'BackStage\ProductsController::addProduct');
+$routes->put('/backstage/product/(:num)', 'BackStage\ProductsController::editProduct/$1');
+$routes->delete('/backstage/product/(:num)', 'BackStage\ProductsController::deleteProduct/$1');
+$routes->get('/backstage/product/(:num)', 'BackStage\ProductsController::showPerProduct/$1');
 
+$routes->get('/product', 'FrontStage\ProductsController::showProducts');
+$routes->get('/product/(:num)', 'FrontStage\ProductsController::showPerProduct/$1');
 /*
  * --------------------------------------------------------------------
  * Additional Routing
