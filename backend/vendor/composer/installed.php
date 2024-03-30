@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'codeigniter4/appstarter',
-        'pretty_version' => 'dev-main',
-        'version' => 'dev-main',
-        'reference' => 'dbee6d7da2158b630d3c3111c39a799fec7d7661',
+        'pretty_version' => '1.0.0+no-version-set',
+        'version' => '1.0.0.0',
+        'reference' => null,
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,18 +11,18 @@
     ),
     'versions' => array(
         'codeigniter4/appstarter' => array(
-            'pretty_version' => 'dev-main',
-            'version' => 'dev-main',
-            'reference' => 'dbee6d7da2158b630d3c3111c39a799fec7d7661',
+            'pretty_version' => '1.0.0+no-version-set',
+            'version' => '1.0.0.0',
+            'reference' => null,
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
         'codeigniter4/framework' => array(
-            'pretty_version' => 'v4.4.6',
-            'version' => '4.4.6.0',
-            'reference' => '7d393f85e8410f16654fa9b486694ff68c354c99',
+            'pretty_version' => 'v4.4.7',
+            'version' => '4.4.7.0',
+            'reference' => 'e6a2f707966ac74e41918434c84b3fb9d8291562',
             'type' => 'project',
             'install_path' => __DIR__ . '/../codeigniter4/framework',
             'aliases' => array(),

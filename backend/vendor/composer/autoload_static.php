@@ -311,6 +311,7 @@ class ComposerStaticInitb20ed479aad5a61a78202f1363033797
         'CodeIgniter\\HTTP\\CURLRequest' => __DIR__ . '/..' . '/codeigniter4/framework/system/HTTP/CURLRequest.php',
         'CodeIgniter\\HTTP\\ContentSecurityPolicy' => __DIR__ . '/..' . '/codeigniter4/framework/system/HTTP/ContentSecurityPolicy.php',
         'CodeIgniter\\HTTP\\DownloadResponse' => __DIR__ . '/..' . '/codeigniter4/framework/system/HTTP/DownloadResponse.php',
+        'CodeIgniter\\HTTP\\Exceptions\\BadRequestException' => __DIR__ . '/..' . '/codeigniter4/framework/system/HTTP/Exceptions/BadRequestException.php',
         'CodeIgniter\\HTTP\\Exceptions\\HTTPException' => __DIR__ . '/..' . '/codeigniter4/framework/system/HTTP/Exceptions/HTTPException.php',
         'CodeIgniter\\HTTP\\Exceptions\\RedirectException' => __DIR__ . '/..' . '/codeigniter4/framework/system/HTTP/Exceptions/RedirectException.php',
         'CodeIgniter\\HTTP\\Files\\FileCollection' => __DIR__ . '/..' . '/codeigniter4/framework/system/HTTP/Files/FileCollection.php',

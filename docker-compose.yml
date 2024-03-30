@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+    ci4_service:
+        build: .
+        ports:
+            - 8081:80
+        working_dir: /backend
+        environment: 
+            - WEB_DOCUMENT_ROOT=/backend/public
+            - PHP_MEMORY_LIMIT=512M
+            - PHP_MAX_EXECUTION_TIME=30
+            - PHP_POST_MAX_SIZE=20M
+            - PHP_UPLOAD_MAX_FILESIZE=20M
+        volumes:
+            - './backend:/backend'
+    ci4_DB:
+        image: mysql:5.7
+        environment:
+            MYSQL_DATABASE: shopping
+            MYSQL_ROOT_PASSWORD: root
+        ports:
+            - "3306:3306"
