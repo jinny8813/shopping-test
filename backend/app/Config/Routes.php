@@ -48,6 +48,12 @@ $routes->group('/', ['filter' => 'JwtAuth','ApiAccessFilter'], function($routes)
     $routes->get('/editMemberData', 'MemberManage::renderEditMemberDataPage');
     $routes->post('/editMemberData', 'MemberManage::update');
     $routes->delete('/delete', 'MemberManage::delete');
+
+
+    $routes->get('/cartItems', 'FrontStage\CartItemsController::showCartItems');
+    $routes->post('/cartItems', 'FrontStage\CartItemsController::addCartItem');
+    $routes->put('/cartItems/(:num)', 'FrontStage\CartItemsController::editCartItem/$1');
+    $routes->delete('/cartItems/(:num)', 'FrontStage\CartItemsController::deleteCartItem/$1');
 });
 
 $routes->get('/backstage/product', 'BackStage\ProductsController::showProducts');
