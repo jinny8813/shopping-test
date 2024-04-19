@@ -44,19 +44,19 @@ class MembersController extends BaseController
     {
         $data = $this->request->getPost();
 
-        $account    = $data['account'] ?? null;
+        $email    = $data['email'] ?? null;
         $password   = $data['password'] ?? null;
 
-        if($account === null || $password === null) {
+        if($email === null || $password === null) {
             return $this->fail("需帳號密碼進行登入", 404);
         }
 
-        if($account === " " || $password === " ") {
+        if($email === " " || $password === " ") {
             return $this->fail("需帳號密碼進行登入", 404);
         }
 
         $membersModel = new MembersModel();
-        $memberData  = $membersModel->where("m_account", $account)->first();
+        $memberData  = $membersModel->where("m_email", $email)->first();
 
         if($memberData === null) {
             return $this->fail("查無此帳號", 403);
@@ -66,7 +66,7 @@ class MembersController extends BaseController
             $key = getenv('JWT_SECRET');
             $payload = array(
                 'm_id'      => $memberData['m_id'],
-                'm_account' => $memberData['m_account']
+                'm_email' => $memberData['m_email']
             );
             $token = JWT::encode($payload, $key, 'HS256');
             return $this->respond([
@@ -83,15 +83,15 @@ class MembersController extends BaseController
     {
         $data = $this->request->getPost();
 
-        $account    = $data['account'] ?? null;
+        $email    = $data['email'] ?? null;
         $password   = $data['password'] ?? null;
         $repassword = $data['repassword'] ?? null;
 
-        if($account === null || $password === null || $repassword === null) {
+        if($email === null || $password === null || $repassword === null) {
             return $this->fail("需帳號密碼進行註冊", 404);
         }
 
-        if($account === " " || $password === " " || $repassword === " ") {
+        if($email === " " || $password === " " || $repassword === " ") {
             return $this->fail("需帳號密碼進行註冊", 404);
         }
 
@@ -100,14 +100,14 @@ class MembersController extends BaseController
         }
 
         $membersModel = new MembersModel();
-        $memberData  = $membersModel->where("m_account", $account)->first();
+        $memberData  = $membersModel->where("m_email", $email)->first();
 
         if($memberData != null) {
             return $this->fail("帳號已被註冊", 403);
         }
 
         $values = [
-            'm_account'  =>  $account,
+            'm_email'  =>  $email,
             'm_password' =>  password_hash($password, PASSWORD_DEFAULT),
         ];
         $membersModel->insert($values);

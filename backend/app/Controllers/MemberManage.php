@@ -12,7 +12,7 @@ class MemberManage extends BaseController
 
     public function index()
     {
-        $memberData = session()->get("memberdata")->m_account;
+        $memberData = session()->get("memberdata")->m_email;
 
         return $this->respond([
             "status" => true,
