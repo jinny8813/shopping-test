@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class MembersModel extends Model
 {
-    protected $table            = 'members';
+    protected $table            = 'Members';
     protected $primaryKey       = 'm_id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';

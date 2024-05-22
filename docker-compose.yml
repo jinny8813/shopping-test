@@ -4,7 +4,7 @@ services:
     ci4_service:
         build: .
         ports:
-            - 8081:80
+            - 8080:80
         working_dir: /backend
         environment: 
             - WEB_DOCUMENT_ROOT=/backend/public
@@ -20,4 +20,4 @@ services:
             MYSQL_DATABASE: shopping
             MYSQL_ROOT_PASSWORD: root
         ports:
-            - "3306:3306"
+            - "3306"

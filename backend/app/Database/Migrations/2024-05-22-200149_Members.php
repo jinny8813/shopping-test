@@ -16,21 +16,40 @@ class Members extends Migration
                 'auto_increment' => true,
                 'unsigned'       => true
             ],
-            'm_account'       => [
-                'type'           => 'VARCHAR',
-                'constraint'     => 100,
-                'unique'         => true,
-                'null'           => false
-            ],
-            'm_password'      => [
+            'm_email'        => [
                 'type'           => 'VARCHAR',
                 'constraint'     => 100,
                 'null'           => false
             ],
-            'm_name'           => [
+            'm_password'     => [
                 'type'           => 'VARCHAR',
-                'constraint'     => 15,
+                'constraint'     => 245,
                 'null'           => false
+            ],
+            'm_gmail'        => [
+                'type'           => 'VARCHAR',
+                'constraint'     => 100,
+                'null'           => true
+            ],
+            'm_line'         => [
+                'type'           => 'VARCHAR',
+                'constraint'     => 100,
+                'null'           => true
+            ],
+            'm_fb'           => [
+                'type'           => 'VARCHAR',
+                'constraint'     => 100,
+                'null'           => true
+            ],
+            'm_name'         => [
+                'type'           => 'VARCHAR',
+                'constraint'     => 20,
+                'null'           => true
+            ],
+            'm_phone'         => [
+                'type'           => 'VARCHAR',
+                'constraint'     => 20,
+                'null'           => true
             ],
             "created_at"      => [
                 'type'           => 'datetime'
@@ -50,6 +69,8 @@ class Members extends Migration
 
     public function down()
     {
-        //
+        if ($this->db->tableExists('Members')) {
+            $this->forge->dropTable('Members');
+        }
     }
 }
