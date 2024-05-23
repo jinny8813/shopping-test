@@ -49,6 +49,14 @@ $routes->group('/', ['filter' => 'JwtAuth','ApiAccessFilter'], function($routes)
     $routes->post('/editMemberData', 'MemberManage::update');
     $routes->delete('/delete', 'MemberManage::delete');
 
+    $routes->get('/backstage/product', 'BackStage\ProductsController::showProducts');
+    $routes->post('/backstage/product', 'BackStage\ProductsController::addProduct');
+    $routes->put('/backstage/product/(:num)', 'BackStage\ProductsController::editProduct/$1');
+    $routes->delete('/backstage/product/(:num)', 'BackStage\ProductsController::deleteProduct/$1');
+    $routes->get('/backstage/product/(:num)', 'BackStage\ProductsController::showPerProduct/$1');
+
+    $routes->get('/product', 'FrontStage\ProductsController::showProducts');
+    $routes->get('/product/(:num)', 'FrontStage\ProductsController::showPerProduct/$1');
 
     $routes->get('/cartItems', 'FrontStage\CartItemsController::showCartItems');
     $routes->post('/cartItems', 'FrontStage\CartItemsController::addCartItem');
@@ -56,14 +64,6 @@ $routes->group('/', ['filter' => 'JwtAuth','ApiAccessFilter'], function($routes)
     $routes->delete('/cartItems/(:num)', 'FrontStage\CartItemsController::deleteCartItem/$1');
 });
 
-$routes->get('/backstage/product', 'BackStage\ProductsController::showProducts');
-$routes->post('/backstage/product', 'BackStage\ProductsController::addProduct');
-$routes->put('/backstage/product/(:num)', 'BackStage\ProductsController::editProduct/$1');
-$routes->delete('/backstage/product/(:num)', 'BackStage\ProductsController::deleteProduct/$1');
-$routes->get('/backstage/product/(:num)', 'BackStage\ProductsController::showPerProduct/$1');
-
-$routes->get('/product', 'FrontStage\ProductsController::showProducts');
-$routes->get('/product/(:num)', 'FrontStage\ProductsController::showPerProduct/$1');
 /*
  * --------------------------------------------------------------------
  * Additional Routing
