@@ -3,7 +3,7 @@
         'name' => 'codeigniter4/appstarter',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'fc999c936639b5eebd7a1e13c8aabc8a44ada5ee',
+        'reference' => '257627cd3f8c6d481c4587d522fa56229b1d3fcc',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'codeigniter4/appstarter' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'fc999c936639b5eebd7a1e13c8aabc8a44ada5ee',
+            'reference' => '257627cd3f8c6d481c4587d522fa56229b1d3fcc',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -36,6 +36,15 @@
             'install_path' => __DIR__ . '/../doctrine/instantiator',
             'aliases' => array(),
             'dev_requirement' => true,
+        ),
+        'ecpay/sdk' => array(
+            'pretty_version' => '1.3.20240508',
+            'version' => '1.3.20240508.0',
+            'reference' => '6b40802a51fa33534426050bf8771023090916ca',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../ecpay/sdk',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'fakerphp/faker' => array(
             'pretty_version' => 'v1.23.1',

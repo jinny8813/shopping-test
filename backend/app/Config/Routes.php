@@ -61,7 +61,13 @@ $routes->group('/', ['filter' => 'JwtAuth','ApiAccessFilter'], function($routes)
     $routes->post('/cartItems', 'FrontStage\CartItemsController::addCartItem');
     $routes->put('/cartItems/(:num)', 'FrontStage\CartItemsController::editCartItem/$1');
     $routes->delete('/cartItems/(:num)', 'FrontStage\CartItemsController::deleteCartItem/$1');
+
+    
 });
+
+$routes->get('/orders', 'FrontStage\OrdersController::createOrder');
+$routes->get('/orderPay', 'FrontStage\EcPayController::orderPay');
+$routes->get('/callbackAfterPayment', 'FrontStage\EcPayController::callbackAfterPayment');
 
 /*
  * --------------------------------------------------------------------

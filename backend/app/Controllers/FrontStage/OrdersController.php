@@ -12,8 +12,8 @@ class OrdersController extends BaseController
 {
     use ResponseTrait;
 
-    public function createOrder{
-        $m_id = session()->get("memberdata")->m_id;
+    public function createOrder(){
+        // $m_id = session()->get("memberdata")->m_id;
 
         $data = $this->request->getPost();
 
@@ -26,14 +26,15 @@ class OrdersController extends BaseController
         $o_address = $data['address'] ?? null;
 
         $o_tradeNumber = uniqid();
+        $o_total = 100;
 
-        $ordersModel = new OrdersModel();
+        // $ordersModel = new OrdersModel();
 
-        $checkOrderIsExist = $orderModel->where('o_tradeNumber',$o_tradeNumber)->first();
+        // $checkOrderIsExist = $orderModel->where('o_tradeNumber',$o_tradeNumber)->first();
 
-        if ($checkOrderIsExist) {
-            return $this->fail("欲建立的訂單已存在", 400);
-        }
+        // if ($checkOrderIsExist) {
+        //     return $this->fail("欲建立的訂單已存在", 400);
+        // }
 
         // $productModel = new ProductModel();
 
@@ -44,18 +45,18 @@ class OrdersController extends BaseController
         //     }
         // }
 
-        $values = [
-            'm_id'          =>  $m_id,
-            'o_tradeNumber' =>  $o_tradeNumber,
-            'o_total'       =>  $o_total,
-            'o_status'      =>  $o_status,
-            'o_name'        =>  $o_name,
-            'o_phone'       =>  $o_phone,
-            'o_address'     =>  $o_address,
-        ];
-        $ordersModel->insert($values);
+        // $values = [
+        //     'm_id'          =>  $m_id,
+        //     'o_tradeNumber' =>  $o_tradeNumber,
+        //     'o_total'       =>  $o_total,
+        //     'o_status'      =>  $o_status,
+        //     'o_name'        =>  $o_name,
+        //     'o_phone'       =>  $o_phone,
+        //     'o_address'     =>  $o_address,
+        // ];
+        // $ordersModel->insert($values);
 
         $ecPay = new EcPayController();
-        $ecPay->orderPay($o_tradeNumber);
+        $ecPay->orderPay($o_tradeNumber, $o_total);
     }
 }
