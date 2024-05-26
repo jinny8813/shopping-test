@@ -4,16 +4,16 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class MembersModel extends Model
+class OrdersModel extends Model
 {
-    protected $table            = 'Members';
-    protected $primaryKey       = 'm_id';
+    protected $table            = 'Orders';
+    protected $primaryKey       = 'o_id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'm_id', 'm_password', 'm_email', 'm_gmail', 'm_line', 'm_fb', 'm_name', 'm_phone', 'm_manage'
+        'o_id','m_id' ,'$o_tradeNumber', 'o_total', 'o_status', 'o_name', 'o_phone', 'o_address'
     ];
 
     // Dates

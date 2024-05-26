@@ -39,6 +39,8 @@ $routes->post('/register', 'MembersController::register');
 $routes->get('/login', 'MembersController::renderLoginPage');
 $routes->post('/login', 'MembersController::login');
 
+$routes->get('/product', 'FrontStage\ProductsController::showProducts');
+$routes->get('/product/(:num)', 'FrontStage\ProductsController::showPerProduct/$1');
 
 $routes->group('/', ['filter' => 'JwtAuth','ApiAccessFilter'], function($routes)
 {
@@ -49,21 +51,24 @@ $routes->group('/', ['filter' => 'JwtAuth','ApiAccessFilter'], function($routes)
     $routes->post('/editMemberData', 'MemberManage::update');
     $routes->delete('/delete', 'MemberManage::delete');
 
+    $routes->get('/backstage/product', 'BackStage\ProductsController::showProducts');
+    $routes->post('/backstage/product', 'BackStage\ProductsController::addProduct');
+    $routes->put('/backstage/product/(:num)', 'BackStage\ProductsController::editProduct/$1');
+    $routes->delete('/backstage/product/(:num)', 'BackStage\ProductsController::deleteProduct/$1');
+    $routes->get('/backstage/product/(:num)', 'BackStage\ProductsController::showPerProduct/$1');
 
     $routes->get('/cartItems', 'FrontStage\CartItemsController::showCartItems');
     $routes->post('/cartItems', 'FrontStage\CartItemsController::addCartItem');
     $routes->put('/cartItems/(:num)', 'FrontStage\CartItemsController::editCartItem/$1');
     $routes->delete('/cartItems/(:num)', 'FrontStage\CartItemsController::deleteCartItem/$1');
+
+    
 });
 
-$routes->get('/backstage/product', 'BackStage\ProductsController::showProducts');
-$routes->post('/backstage/product', 'BackStage\ProductsController::addProduct');
-$routes->put('/backstage/product/(:num)', 'BackStage\ProductsController::editProduct/$1');
-$routes->delete('/backstage/product/(:num)', 'BackStage\ProductsController::deleteProduct/$1');
-$routes->get('/backstage/product/(:num)', 'BackStage\ProductsController::showPerProduct/$1');
+$routes->get('/orders', 'FrontStage\OrdersController::createOrder');
+$routes->get('/orderPay', 'FrontStage\EcPayController::orderPay');
+$routes->get('/callbackAfterPayment', 'FrontStage\EcPayController::callbackAfterPayment');
 
-$routes->get('/product', 'FrontStage\ProductsController::showProducts');
-$routes->get('/product/(:num)', 'FrontStage\ProductsController::showPerProduct/$1');
 /*
  * --------------------------------------------------------------------
  * Additional Routing
