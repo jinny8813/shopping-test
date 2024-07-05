@@ -65,7 +65,9 @@ $routes->group('/', ['filter' => 'JwtAuth','ApiAccessFilter'], function($routes)
     
 });
 
-$routes->get('/orders', 'FrontStage\OrdersController::createOrder');
+$routes->get('/orders', 'FrontStage\OrdersController::testCreateOrder');
+
+$routes->post('/orders', 'FrontStage\OrdersController::createOrder');
 $routes->get('/orderPay', 'FrontStage\EcPayController::orderPay');
 $routes->get('/callbackAfterPayment', 'FrontStage\EcPayController::callbackAfterPayment');
 

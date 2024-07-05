@@ -13,7 +13,7 @@ class OrdersModel extends Model
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'o_id','m_id' ,'$o_tradeNumber', 'o_total', 'o_status', 'o_name', 'o_phone', 'o_address'
+        'o_id','m_id' ,'$o_trade_number', 'o_total', 'o_status', 'o_name', 'o_phone', 'o_address', 'o_product_arr'
     ];
 
     // Dates

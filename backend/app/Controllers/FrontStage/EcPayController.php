@@ -84,11 +84,11 @@ class EcPayController extends BaseController{
             // $updateDetailRes =  $DonationDetailsModel->where('tradeNumber', $MerchantTradeNo)
             //     ->save($DetailsEntity);
 
-            if ($updateDetailRes) {
+            // if ($updateDetailRes) {
                 $response =  "1|OK";
-            } else {
-                $response =  "0|Fail";
-            }
+            // } else {
+            //     $response =  "0|Fail";
+            // }
 
             // $mailController = new MailController();
 
