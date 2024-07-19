@@ -83,9 +83,11 @@ class MembersController extends BaseController
     {
         $data = $this->request->getPost();
 
-        $email    = $data['email'] ?? null;
-        $password   = $data['password'] ?? null;
+        $email      = $data['email']      ?? null;
+        $password   = $data['password']   ?? null;
         $repassword = $data['repassword'] ?? null;
+        $phone      = $data['phone']      ?? null;
+        $address    = $data['address']    ?? null;
 
         if($email === null || $password === null || $repassword === null) {
             return $this->fail("需帳號密碼進行註冊", 404);
@@ -107,8 +109,10 @@ class MembersController extends BaseController
         }
 
         $values = [
-            'm_email'  =>  $email,
+            'm_email'    =>  $email,
             'm_password' =>  password_hash($password, PASSWORD_DEFAULT),
+            'm_phone'    =>  $phone,
+            'm_address'    =>  $address,
         ];
         $membersModel->insert($values);
 

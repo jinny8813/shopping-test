@@ -13,15 +13,16 @@ class Members extends Seeder
 
         $data = [
             [
-                "m_email"=> "jinny@gmail.com",
-                "m_password"=> password_hash("123456", PASSWORD_DEFAULT),
-                "m_gmail"=> null,
-                "m_line"=> null,
-                "m_fb"=> null,
-                "m_name"=> null,
-                "m_phone"=> null,
-                "created_at"=> $now,
-                "updated_at"=> $now,
+                "m_email"    => "jinny@gmail.com",
+                "m_password" => password_hash("123456", PASSWORD_DEFAULT),
+                "m_gmail"    => null,
+                "m_line"     => null,
+                "m_fb"       => null,
+                "m_name"     => null,
+                "m_phone"    => null,
+                "m_address"  => null,
+                "created_at" => $now,
+                "updated_at" => $now,
             ],
         ];
 

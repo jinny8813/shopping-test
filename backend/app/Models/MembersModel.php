@@ -13,7 +13,7 @@ class MembersModel extends Model
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'm_id', 'm_password', 'm_email', 'm_gmail', 'm_line', 'm_fb', 'm_name', 'm_phone'
+        'm_id', 'm_password', 'm_email', 'm_gmail', 'm_line', 'm_fb', 'm_name', 'm_phone', 'm_address'
     ];
 
     // Dates
