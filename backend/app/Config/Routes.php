@@ -69,7 +69,8 @@ $routes->get('/orders', 'FrontStage\OrdersController::testCreateOrder');
 
 $routes->post('/orders', 'FrontStage\OrdersController::createOrder');
 $routes->get('/orderPay', 'FrontStage\EcPayController::orderPay');
-$routes->get('/callbackAfterPayment', 'FrontStage\EcPayController::callbackAfterPayment');
+$routes->post('/callbackAfterPayment', 'FrontStage\EcPayController::callbackAfterPayment');
+$routes->post('/afterPayment', 'FrontStage\EcPayController::afterPayment');
 
 /*
  * --------------------------------------------------------------------
