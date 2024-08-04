@@ -72,6 +72,11 @@ $routes->get('/orderPay', 'FrontStage\EcPayController::orderPay');
 $routes->post('/callbackAfterPayment', 'FrontStage\EcPayController::callbackAfterPayment');
 $routes->post('/afterPayment', 'FrontStage\EcPayController::afterPayment');
 
+$routes->get('/backstage/categories', 'BackStage\CategoriesController::showCategories');
+$routes->post('/backstage/categories', 'BackStage\CategoriesController::addCategory');
+// $routes->put('/backstage/product/(:num)', 'BackStage\CategoriesController::editProduct/$1');
+// $routes->delete('/backstage/product/(:num)', 'BackStage\CategoriesController::deleteProduct/$1');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
