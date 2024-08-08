@@ -50,6 +50,10 @@ class CategoriesController extends BaseController
             return $this->fail("需輸入類別完整資訊", 404);
         }
 
+        if($c_parent_id == 0) {
+            $c_parent_id = null;
+        }
+
         $categoriesModel = new CategoriesModel();
 
         $values = [
@@ -63,7 +67,7 @@ class CategoriesController extends BaseController
                 return $this->fail("類別插入失敗，獲取錯誤訊息(parent_id須為整數或空白)", 404);
             }
         } catch (\Exception $e) {
-            return $this->fail("資料庫異常)", 500);
+            return $this->fail("資料庫異常", 500);
         }
 
         $categoriesData = $categoriesModel->findAll();
@@ -76,76 +80,101 @@ class CategoriesController extends BaseController
         ]);
     }
 
-    // public function editProduct($id)
-    // {
-    //     $data = $this->request->getJSON(true);
+    public function editCategory($id)
+    {
+        $data = $this->request->getJSON(true);
 
-    //     $productsModel = new ProductsModel();
-    //     $verifyProductData = $productsModel->where("p_id", $id)->first();
+        $categoriesModel = new CategoriesModel();
+        $verifyCategoryData = $categoriesModel->where("c_id", $id)->first();
 
-    //     if($verifyProductData === null) {
-    //         return $this->fail("查無此產品", 404);
-    //     }
+        if($verifyCategoryData === null) {
+            return $this->fail("查無此商品分類", 404);
+        }
 
-    //     $p_name        = $data['name'] ?? null;
-    //     $p_description = $data['description'] ?? null;
-    //     $p_price       = $data['price'] ?? null;
-    //     $p_stock       = $data['stock'] ?? null;
-    //     $p_image       = $data['image'] ;
-    //     $p_type        = $data['type'] ?? null;
+        $c_name        = $data['name'] ?? null;
+        $c_parent_id   = $data['parent_id'] ?? null;
 
-    //     if($p_name === null || $p_description === null || $p_price === null || $p_stock === null || $p_type === null) {
-    //         return $this->fail("需輸入商品完整資訊", 404);
-    //     }
+        if($c_name === null || $c_parent_id === null) {
+            return $this->fail("需輸入類別完整資訊", 404);
+        }
 
-    //     if($p_name === " " || $p_description === " " || $p_price === " " || $p_stock === " " || $p_type === " ") {
-    //         return $this->fail("需輸入商品完整資訊", 404);
-    //     }
+        if($c_name === " " || $c_parent_id === " ") {
+            return $this->fail("需輸入類別完整資訊", 404);
+        }
 
+        if($c_parent_id == 0) {
+            $c_parent_id = null;
+        }
 
-    //     $productsModel = new ProductsModel();
+        $updateValues = [
+            'c_name'        =>  $c_name,
+            'c_parent_id'   =>  $c_parent_id,
+        ];
 
-    //     $updateValues = [
-    //         'p_name'        =>  $p_name,
-    //         'p_description' =>  $p_description,
-    //         'p_price'       =>  $p_price,
-    //         'p_stock'       =>  $p_stock,
-    //         'p_image'       =>  $p_image,
-    //         'p_type'        =>  $p_type,
-    //     ];
-    //     $productsModel->update($verifyProductData['p_id'], $updateValues);
+        try {
+            if ($categoriesModel->update($verifyCategoryData['c_id'], $updateValues) === false) {
+                $errors = $categoriesModel->errors();
+                return $this->fail("類別插入失敗，獲取錯誤訊息(parent_id須為整數或空白)", 404);
+            }
+        } catch (\Exception $e) {
+            return $this->fail("資料庫異常", 500);
+        }
 
-    //     return $this->respond([
-    //         "status" => true,
-    //         "data"   => $updateValues,
-    //         "msg"    => "updated the product"
-    //     ]);
-    // }
+        $categoriesData = $categoriesModel->findAll();
+        $structuredCategories = $this->buildCategoryTree($categoriesData);
 
-    // public function deleteProduct($id)
-    // {
-    //     $productsModel = new ProductsModel();
-    //     $verifyProductData = $productsModel->where("p_id", $id)->first();
+        return $this->respond([
+            "status" => true,
+            "data"   => $structuredCategories,
+            "msg"    => "updated the Category"
+        ]);
+    }
 
-    //     if($verifyProductData === null) {
-    //         return $this->fail("查無此產品", 404);
-    //     }
+    public function deleteCategory($id)
+    {
+        $categoriesModel = new CategoriesModel();
+        $verifyCategoryData = $categoriesModel->where("c_id", $id)->first();
 
-    //     $productsModel->delete($verifyProductData['p_id']);
+        if($verifyCategoryData === null) {
+            return $this->fail("查無此商品分類", 404);
+        }
 
-    //     return $this->respond([
-    //         "status" => true,
-    //         "data"   => "deleted the product",
-    //         "msg"    => "deleted the product"
-    //     ]);
-    // }
+        try {
+            // 開始事務處理
+            $categoriesModel->db->transBegin();
+
+            // 遞迴刪除父類別及其所有子類別
+            $this->deleteCategoryRecursively($categoriesModel, $id);
+
+            // 提交事務
+            if ($categoriesModel->db->transStatus() === false) {
+                $categoriesModel->db->transRollback();
+
+                return $this->fail("刪除失敗", 500);
+            } else {
+                $categoriesModel->db->transCommit();
+
+                $categoriesData = $categoriesModel->findAll();
+                $structuredCategories = $this->buildCategoryTree($categoriesData);
+                
+                return $this->respond([
+                    "status" => true,
+                    "data"   => $structuredCategories,
+                    "msg"    => "updated the Category"
+                ]);
+            }
+        } catch (\Exception $e) {
+            $categoriesModel->db->transRollback();
+            return $this->fail("刪除失敗(資料庫異常)", 500);
+        }
+    }
 
     private function buildCategoryTree(array $categories, $parentId = null)
     {
         $branch = [];
 
         foreach ($categories as $category) {
-            if ($category['c_parent_id'] == $parentId) {
+            if ($category['c_parent_id'] === $parentId) {
                 $children = $this->buildCategoryTree($categories, $category['c_id']);
                 if ($children) {
                     $category['children'] = $children;
@@ -155,5 +184,16 @@ class CategoriesController extends BaseController
         }
 
         return $branch;
+    }
+
+    private function deleteCategoryRecursively($model, $parentId)
+    {
+        $children = $model->where('c_parent_id', $parentId)->findAll();
+
+        foreach ($children as $child) {
+            $this->deleteCategoryRecursively($model, $child['c_id']);
+        }
+
+        $model->delete($parentId);
     }
 }

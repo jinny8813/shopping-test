@@ -74,8 +74,8 @@ $routes->post('/afterPayment', 'FrontStage\EcPayController::afterPayment');
 
 $routes->get('/backstage/categories', 'BackStage\CategoriesController::showCategories');
 $routes->post('/backstage/categories', 'BackStage\CategoriesController::addCategory');
-// $routes->put('/backstage/product/(:num)', 'BackStage\CategoriesController::editProduct/$1');
-// $routes->delete('/backstage/product/(:num)', 'BackStage\CategoriesController::deleteProduct/$1');
+$routes->put('/backstage/categories/(:num)', 'BackStage\CategoriesController::editCategory/$1');
+$routes->delete('/backstage/categories/(:num)', 'BackStage\CategoriesController::deleteCategory/$1');
 
 /*
  * --------------------------------------------------------------------

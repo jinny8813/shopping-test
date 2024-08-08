@@ -13,7 +13,7 @@ class CategoriesModel extends Model
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'c_id', 'name', 'c_parent_id'
+        'c_id', 'c_name', 'c_parent_id'
     ];
 
     // Dates
