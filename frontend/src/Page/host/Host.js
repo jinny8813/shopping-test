@@ -12,40 +12,33 @@ import {
   Tabs,
   message,
 } from "antd";
-import Carousel from "../Components/Carousel";
-import Breadcrumb from "../Components/UI/store/Breadcrumb";
-import { useCart } from "../Hooks/useCart";
+import Carousel from "../../Components/Carousel";
+import Breadcrumb from "../../Components/UI/store/Breadcrumb";
 const { Content } = Layout;
 
-const Product = () => {
-  const { productId } = useParams();
-  const [productData, setProductData] = useState();
-  const { addItem } = useCart();
+const Host = () => {
+  const [hostData, setHostData] = useState();
 
   const [messageApi, contextHolder] = message.useMessage();
   const success = () => {
-    addItem(productData);
-
     messageApi.open({
       type: "success",
       content: "已加入購物車",
     });
   };
 
-  const numOnChange = (value) => {
-    setProductData({ ...productData, p_num: value });
-  };
+  const tabOnChange = () => {};
 
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
   async function getData() {
-    const response = await fetch(`/product/${productId}`);
+    const response = await fetch("/product/2");
     const data = await response.json();
 
-    setProductData({ ...data.data, p_num: 1, key: data.data.p_id });
-    console.log(productData);
+    setHostData(data.data);
+    console.log(hostData);
   }
 
   useEffect(() => {
@@ -60,7 +53,7 @@ const Product = () => {
           padding: "2rem 8rem",
         }}
       >
-        <Breadcrumb title={productData ? productData.p_name : ""} />
+        <Breadcrumb title={"客製化主機"} />
         <div
           style={{
             background: colorBgContainer,
@@ -70,7 +63,7 @@ const Product = () => {
           }}
         >
           <Row justify="center" align="middle">
-            {productData ? (
+            {hostData ? (
               <>
                 <Col span={12}>
                   <Carousel
@@ -81,24 +74,24 @@ const Product = () => {
                   />
                 </Col>
                 <Col span={10}>
-                  <h1>{productData.p_name}</h1>
+                  <h1>{hostData.p_name}</h1>
                   <ul>
-                    <li>{productData.p_description}</li>
+                    <li>{hostData.p_description}</li>
                     <li>物品所在地：台灣.高雄市</li>
                     <li>上架時間：2023-12-16 17:29:22</li>
                   </ul>
                   <hr />
-                  <p>{`價格：$${productData.p_price}`}</p>
+                  <p>{`價格：$${hostData.p_price}`}</p>
                   <div style={{ display: "flex", alignItems: "baseline" }}>
                     <p>數量：</p>
                     <InputNumber
                       min={1}
-                      max={productData.p_stock}
+                      max={10}
                       defaultValue={1}
-                      onChange={numOnChange}
+                      onChange={tabOnChange}
                     />
                   </div>
-                  <p>庫存：{productData.p_stock}</p>
+                  <p>庫存：{hostData.p_stock}</p>
                   <Button type="primary" onClick={success}>
                     加入購物車
                   </Button>
@@ -199,9 +192,9 @@ const Product = () => {
                                 <p>數量：</p>
                                 <InputNumber
                                   min={1}
-                                  max={productData.p_stock}
+                                  max={10}
                                   defaultValue={1}
-                                  onChange={numOnChange}
+                                  onChange={tabOnChange}
                                 />
                               </div>
                             </Col>
@@ -228,4 +221,4 @@ const Product = () => {
     </Layout>
   );
 };
-export default Product;
+export default Host;

@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { Row, Col, Menu, Input, Layout, Tag } from "antd";
-import Item from "../Components/store/Item";
-import Dropdown from "../Components/UI/Dropdown";
-import Breadcrumb from "../Components/UI/store/Breadcrumb";
+import Item from "../../Components/host_store/Item";
+import Dropdown from "../../Components/UI/Dropdown";
+import Breadcrumb from "../../Components/UI/store/Breadcrumb";
 const { Content } = Layout;
 const { Search } = Input;
 
-const Store = () => {
+export const Store = () => {
   const [products, setProducts] = useState();
 
   function getItem(label, key, children, type) {
@@ -107,5 +107,3 @@ const Store = () => {
     </Layout>
   );
 };
-
-export default Store;

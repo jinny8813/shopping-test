@@ -1,6 +1,6 @@
 import { Menu } from "antd";
 import { Header } from "antd/es/layout/layout";
-import { ShoppingCartOutlined } from "@ant-design/icons";
+import { UserOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
 import { GoogleLogin } from "@react-oauth/google";
@@ -9,16 +9,15 @@ import LineButton from "./LineButton";
 const Nav = () => {
   const items = [
     {
-      label: "首頁",
+      label: <Link to="/">首頁</Link>,
       key: "home",
     },
     {
       label: "線上商店",
       key: "store",
-      icon: <ShoppingCartOutlined />,
       children: [
         {
-          label: <Link to="product">客製化主機</Link>,
+          label: <Link to="host_store">客製化主機</Link>,
           key: "store:1",
         },
         {
@@ -53,6 +52,12 @@ const Nav = () => {
       label: <LineButton />,
       key: "line",
       style: { padding: "0px", margin: "0px 16px", borderRadius: "5px" },
+    },
+    {
+      label: <Link to="user">會員中心</Link>,
+      key: "user",
+      icon: <UserOutlined />,
+      style: { position: "absolute", right: "120px" },
     },
     {
       label: <Link to="cart">購物車</Link>,
