@@ -5,12 +5,20 @@ namespace App\Controllers\BackStage;
 use App\Controllers\BaseController;
 use CodeIgniter\API\ResponseTrait;
 use App\Models\CategoriesModel;
+use App\Services\ProductCategory;
 
 
 
 class CategoriesController extends BaseController
 {
     use ResponseTrait;
+
+    protected $productCategory;
+
+    public function __construct()
+    {
+        $this->productCategory = new ProductCategory();
+    }
 
     public function index()
     {
@@ -26,7 +34,7 @@ class CategoriesController extends BaseController
         $categoriesModel = new CategoriesModel();
         $categoriesData = $categoriesModel->findAll();
 
-        $structuredCategories = $this->buildCategoryTree($categoriesData);
+        $structuredCategories = $this->productCategory->buildCategoryTree($categoriesData);
 
         return $this->respond([
             "status" => true,
@@ -71,7 +79,7 @@ class CategoriesController extends BaseController
         }
 
         $categoriesData = $categoriesModel->findAll();
-        $structuredCategories = $this->buildCategoryTree($categoriesData);
+        $structuredCategories = $this->productCategory->buildCategoryTree($categoriesData);
 
         return $this->respond([
             "status" => true,
@@ -121,7 +129,7 @@ class CategoriesController extends BaseController
         }
 
         $categoriesData = $categoriesModel->findAll();
-        $structuredCategories = $this->buildCategoryTree($categoriesData);
+        $structuredCategories = $this->productCategory->buildCategoryTree($categoriesData);
 
         return $this->respond([
             "status" => true,
@@ -140,13 +148,10 @@ class CategoriesController extends BaseController
         }
 
         try {
-            // 開始事務處理
             $categoriesModel->db->transBegin();
 
-            // 遞迴刪除父類別及其所有子類別
             $this->deleteCategoryRecursively($categoriesModel, $id);
 
-            // 提交事務
             if ($categoriesModel->db->transStatus() === false) {
                 $categoriesModel->db->transRollback();
 
@@ -155,7 +160,7 @@ class CategoriesController extends BaseController
                 $categoriesModel->db->transCommit();
 
                 $categoriesData = $categoriesModel->findAll();
-                $structuredCategories = $this->buildCategoryTree($categoriesData);
+                $structuredCategories = $this->productCategory->buildCategoryTree($categoriesData);
                 
                 return $this->respond([
                     "status" => true,
@@ -167,23 +172,6 @@ class CategoriesController extends BaseController
             $categoriesModel->db->transRollback();
             return $this->fail("刪除失敗(資料庫異常)", 500);
         }
-    }
-
-    private function buildCategoryTree(array $categories, $parentId = null)
-    {
-        $branch = [];
-
-        foreach ($categories as $category) {
-            if ($category['c_parent_id'] === $parentId) {
-                $children = $this->buildCategoryTree($categories, $category['c_id']);
-                if ($children) {
-                    $category['children'] = $children;
-                }
-                $branch[] = $category;
-            }
-        }
-
-        return $branch;
     }
 
     private function deleteCategoryRecursively($model, $parentId)
