@@ -13,7 +13,7 @@ class ProductsModel extends Model
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'p_id', 'p_name', 'p_description', 'p_price', 'p_stock', 'p_image', 'p_type'
+        'p_id', 'p_name', 'p_description', 'p_price', 'p_stock', 'p_image', 'p_type','c_id'
     ];
 
     // Dates

@@ -51,11 +51,11 @@ $routes->group('/', ['filter' => 'JwtAuth','ApiAccessFilter'], function($routes)
     $routes->post('/editMemberData', 'MemberManage::update');
     $routes->delete('/delete', 'MemberManage::delete');
 
-    $routes->get('/backstage/product', 'BackStage\ProductsController::showProducts');
-    $routes->post('/backstage/product', 'BackStage\ProductsController::addProduct');
-    $routes->put('/backstage/product/(:num)', 'BackStage\ProductsController::editProduct/$1');
-    $routes->delete('/backstage/product/(:num)', 'BackStage\ProductsController::deleteProduct/$1');
-    $routes->get('/backstage/product/(:num)', 'BackStage\ProductsController::showPerProduct/$1');
+    // $routes->get('/backstage/product', 'BackStage\ProductsController::showProducts');
+    // $routes->post('/backstage/product', 'BackStage\ProductsController::addProduct');
+    // $routes->put('/backstage/product/(:num)', 'BackStage\ProductsController::editProduct/$1');
+    // $routes->delete('/backstage/product/(:num)', 'BackStage\ProductsController::deleteProduct/$1');
+    // $routes->get('/backstage/product/(:num)', 'BackStage\ProductsController::showPerProduct/$1');
 
     $routes->get('/cartItems', 'FrontStage\CartItemsController::showCartItems');
     $routes->post('/cartItems', 'FrontStage\CartItemsController::addCartItem');
@@ -76,6 +76,17 @@ $routes->get('/backstage/categories', 'BackStage\CategoriesController::showCateg
 $routes->post('/backstage/categories', 'BackStage\CategoriesController::addCategory');
 $routes->put('/backstage/categories/(:num)', 'BackStage\CategoriesController::editCategory/$1');
 $routes->delete('/backstage/categories/(:num)', 'BackStage\CategoriesController::deleteCategory/$1');
+
+$routes->get('/backstage/product', 'BackStage\ProductsController::showProducts');
+$routes->post('/backstage/product', 'BackStage\ProductsController::addProduct');
+$routes->put('/backstage/product/(:num)', 'BackStage\ProductsController::editProduct/$1');
+$routes->delete('/backstage/product/(:num)', 'BackStage\ProductsController::deleteProduct/$1');
+$routes->get('/backstage/product/(:num)', 'BackStage\ProductsController::showPerProduct/$1');
+
+$routes->get('/backstage/order', 'BackStage\OrdersController::showOrders');
+$routes->put('/backstage/order/(:num)', 'BackStage\OrdersController::editOrder/$1');
+$routes->delete('/backstage/order/(:num)', 'BackStage\OrdersController::deleteOrder/$1');
+$routes->get('/backstage/order/(:num)', 'BackStage\OrdersController::showPerOrder/$1');
 
 /*
  * --------------------------------------------------------------------

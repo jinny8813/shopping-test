@@ -5,6 +5,7 @@ namespace App\Controllers\BackStage;
 use App\Controllers\BaseController;
 use CodeIgniter\API\ResponseTrait;
 use App\Models\ProductsModel;
+use App\Services\ProductCategory;
 
 
 
@@ -43,6 +44,7 @@ class ProductsController extends BaseController
         $p_stock       = $data['stock'] ?? null;
         $p_image       = $data['image'] ;
         $p_type        = $data['type'] ?? null;
+        $c_id          = $data['c_id'] ?? null;
 
         if($p_name === null || $p_description === null || $p_price === null || $p_stock === null || $p_type === null) {
             return $this->fail("需輸入商品完整資訊", 404);
@@ -52,6 +54,9 @@ class ProductsController extends BaseController
             return $this->fail("需輸入商品完整資訊", 404);
         }
 
+        if($c_id == 0) {
+            $c_id = null;
+        }
 
         $productsModel = new ProductsModel();
 
@@ -62,8 +67,17 @@ class ProductsController extends BaseController
             'p_stock'       =>  $p_stock,
             'p_image'       =>  $p_image,
             'p_type'        =>  $p_type,
+            'c_id'          =>  $c_id,
         ];
-        $productsModel->insert($values);
+
+        try {
+            if ($productsModel->insert($values) === false) {
+                $errors = $productsModel->errors();
+                return $this->fail("類別插入失敗，獲取錯誤訊息(c_id須為整數或空白)", 404);
+            }
+        } catch (\Exception $e) {
+            return $this->fail("資料庫異常", 500);
+        }
 
         return $this->respond([
             "status" => true,
@@ -89,6 +103,7 @@ class ProductsController extends BaseController
         $p_stock       = $data['stock'] ?? null;
         $p_image       = $data['image'] ;
         $p_type        = $data['type'] ?? null;
+        $c_id          = $data['c_id'] ?? null;
 
         if($p_name === null || $p_description === null || $p_price === null || $p_stock === null || $p_type === null) {
             return $this->fail("需輸入商品完整資訊", 404);
@@ -108,8 +123,17 @@ class ProductsController extends BaseController
             'p_stock'       =>  $p_stock,
             'p_image'       =>  $p_image,
             'p_type'        =>  $p_type,
+            'c_id'          =>  $c_id,
         ];
-        $productsModel->update($verifyProductData['p_id'], $updateValues);
+
+        try {
+            if ($productsModel->update($verifyProductData['p_id'], $updateValues) === false) {
+                $errors = $productsModel->errors();
+                return $this->fail("類別插入失敗，獲取錯誤訊息(c_id須為整數或空白)", 404);
+            }
+        } catch (\Exception $e) {
+            return $this->fail("資料庫異常", 500);
+        }
 
         return $this->respond([
             "status" => true,
