@@ -12,6 +12,8 @@ import {
   Select,
   Button,
   InputNumber,
+  Form,
+  Checkbox,
 } from "antd";
 const { Content } = Layout;
 const { TextArea } = Input;
@@ -72,6 +74,10 @@ const Cart = () => {
     },
   ];
 
+  const submitHandler = (values) => {
+    console.log("Success:", values);
+  };
+
   const options = [
     {
       value: "200",
@@ -114,64 +120,114 @@ const Cart = () => {
           </Row>
           <br />
           {cartData.length > 0 ? (
-            <form>
+            <>
               <Row justify="center" align="middle">
                 <Col span={12}>
                   <h2>總金額：{totalPrice} 元</h2>
                 </Col>
               </Row>
 
-              <Row justify="center" align="middle">
-                <Col span={12}>
-                  <h3>付款方式</h3>
+              <Form onFinish={submitHandler}>
+                <Row justify="center" align="middle">
+                  <Col span={12}>
+                    <h3>付款方式</h3>
+                    <Form.Item
+                      name="payment"
+                      valuePropName="checked"
+                      rules={[
+                        {
+                          required: true,
+                          message: "請選擇支付方式！",
+                        },
+                      ]}
+                    >
+                      <Checkbox>
+                        綠界支付(支援信用卡/ATM/超商繳費，下一頁填寫)
+                      </Checkbox>
+                    </Form.Item>
 
-                  <input type="checkbox" required></input>
-                  <label>綠界支付(支援信用卡/ATM/超商繳費，下一頁填寫)</label>
-
-                  <h3 style={{ paddingTop: "12px" }}>配送資訊</h3>
-                  <form
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      lineHeight: "24px",
-                      paddingBottom: "24px",
-                    }}
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        lineHeight: "24px",
+                        paddingBottom: "24px",
+                      }}
+                    >
+                      <h3 style={{ paddingTop: "12px" }}>配送資訊</h3>
+                      <Form.Item
+                        label="連絡電話"
+                        name="phone"
+                        rules={[
+                          {
+                            required: true,
+                            message: "請填寫連絡電話！",
+                          },
+                        ]}
+                      >
+                        <Input />
+                      </Form.Item>
+                      <Form.Item label="地址" required={true}>
+                        <Space.Compact block>
+                          <Form.Item
+                            name={["address", "code"]}
+                            rules={[
+                              {
+                                required: true,
+                                message: "請填寫郵遞區號！",
+                              },
+                            ]}
+                            style={{ width: "20%" }}
+                          >
+                            <Select defaultValue="郵遞區號" options={options} />
+                          </Form.Item>
+                          <Form.Item
+                            name={["address", "fullAddress"]}
+                            rules={[
+                              {
+                                required: true,
+                                message: "請填寫詳細地址！",
+                              },
+                            ]}
+                            style={{ width: "80%" }}
+                          >
+                            <Input placeholder="詳細地址" required />
+                          </Form.Item>
+                        </Space.Compact>
+                      </Form.Item>
+                    </div>
+                    <Form.Item
+                      label="如有備註請註明"
+                      style={{ display: "flex", flexDirection: "column" }}
+                    >
+                      <TextArea
+                        rows={4}
+                        placeholder="客製化需求、運送注意事項..."
+                        maxLength={6}
+                      />
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <br />
+                <Row justify="center" align="middle">
+                  <Col
+                    span={12}
+                    style={{ display: "flex", justifyContent: "flex-end" }}
                   >
-                    <label>連絡電話</label>
-                    <Input required />
-                    <label>地址</label>
-                    <Space.Compact>
-                      <Select defaultValue="郵遞區號" options={options} />
-                      <Input placeholder="詳細地址" required />
-                    </Space.Compact>
-                  </form>
-                  <p>如有備註請於下方註明</p>
-                  <TextArea
-                    rows={4}
-                    placeholder="客製化需求、運送注意事項..."
-                    maxLength={6}
-                  />
-                </Col>
-              </Row>
-              <br />
-              <Row justify="center" align="middle">
-                <Col
-                  span={12}
-                  style={{ display: "flex", justifyContent: "flex-end" }}
-                >
-                  <Button>
-                    <Link to="/store">繼續選購</Link>
-                  </Button>
-                  <Button
-                    type="primary"
-                    htmlType="submit"
-                    style={{ marginLeft: "1rem" }}
-                  >
-                    結帳
-                  </Button>
-                </Col>
-              </Row>
-            </form>
+                    <Button>
+                      <Link to="/store">繼續選購</Link>
+                    </Button>
+                    <Button
+                      type="primary"
+                      htmlType="submit"
+                      style={{ marginLeft: "1rem" }}
+                    >
+                      結帳
+                    </Button>
+                  </Col>
+                </Row>
+              </Form>
+            </>
           ) : (
             <Row justify="center" align="middle">
               <Col
