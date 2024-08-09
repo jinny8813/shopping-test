@@ -17,7 +17,7 @@ export const EditorComponent = (props) => {
   return (
     <div style={{ border: "1px solid #888888", height: "600px" }}>
       <Editor
-        apiKey="ew59f90ld4utt1o6wl58amnl2r0ene9euagh4rxwgd6vfpf6"
+        apiKey="paste TinyMCE api key here"
         onInit={(_evt, editor) => (editorRef.current = editor)}
         init={{
           plugins:
