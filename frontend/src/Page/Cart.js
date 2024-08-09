@@ -75,8 +75,20 @@ const Cart = () => {
   ];
 
   const submitHandler = (values) => {
-    console.log("Success:", values);
+    const data = { ...values, cartData };
+    console.log("Success:", data);
+    postOrder(values);
   };
+
+  async function postOrder(data) {
+    const status = await fetch("/orders", {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+    const response = await status.json();
+
+    console.log(response);
+  }
 
   const options = [
     {
@@ -179,7 +191,7 @@ const Cart = () => {
                             ]}
                             style={{ width: "20%" }}
                           >
-                            <Select defaultValue="郵遞區號" options={options} />
+                            <Select initialvalue="郵遞區號" options={options} />
                           </Form.Item>
                           <Form.Item
                             name={["address", "fullAddress"]}
