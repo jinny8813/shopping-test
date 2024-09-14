@@ -88,6 +88,13 @@ $routes->put('/backstage/order/(:num)', 'BackStage\OrdersController::editOrder/$
 $routes->delete('/backstage/order/(:num)', 'BackStage\OrdersController::deleteOrder/$1');
 $routes->get('/backstage/order/(:num)', 'BackStage\OrdersController::showPerOrder/$1');
 
+$routes->get('/order', 'FrontStage\OrdersController::showOrders');
+$routes->put('order/(:num)', 'FrontStage\OrdersController::editOrder/$1');
+
+$routes->post('/backstage/storeInfo', 'BackStage\StoreInfoController::addStoreInfo');
+$routes->put('/backstage/storeInfo/(:num)', 'BackStage\StoreInfoController::editStoreInfo/$1');
+$routes->delete('/backstage/storeInfo/(:num)', 'BackStage\StoreInfoController::deleteStoreInfo/$1');
+$routes->get('/backstage/storeInfo/(:num)', 'BackStage\StoreInfoController::showPerStoreInfo/$1');
 /*
  * --------------------------------------------------------------------
  * Additional Routing
