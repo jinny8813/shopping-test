@@ -109,4 +109,58 @@ class OrdersController extends BaseController
         $ecPay = new EcPayController();
         $ecPay->orderPay($o_trade_number, $o_total);
     }
+
+    public function showOrder(){
+        // $m_id = session()->get("memberdata")->m_id;
+        $m_id = 1;
+
+        $ordersModel = new OrdersModel();
+        $ordersData = $ordersModel->where('m_id',$m_id)->findAll();
+
+        return $this->respond([
+            "status" => true,
+            "data"   => $ordersData,
+            "msg"    => "Show all products"
+        ]);
+    }
+
+    public function editOrder($id){
+        // $m_id = session()->get("memberdata")->m_id;
+
+        $m_id = 1;
+
+        $data = $this->request->getJSON(true);
+
+        $o_status  = $data['status'] ?? null;
+
+        $ordersModel = new OrdersModel();
+        $verifyOrderData = $ordersModel->where("o_id", $id)->first();
+
+        if($verifyOrderData === null) {
+            return $this->fail("查無此訂單", 404);
+        }
+
+        if($verifyOrderData['m_id'] === $m_id) {
+            return $this->fail("無此訂單修改權限", 404);
+        }
+
+        $updateValues = [
+            'o_status'  =>  $o_status,
+        ];
+
+        try {
+            if ($ordersModel->update($verifyOrderData['o_id'], $updateValues) === false) {
+                $errors = $ordersModel->errors();
+                return $this->fail("沒有資料要更新", 404);
+            }
+        } catch (\Exception $e) {
+            return $this->fail("資料庫異常", 500);
+        }
+
+        return $this->respond([
+            "status" => true,
+            "data"   => "updated the order",
+            "msg"    => "updated the order"
+        ]);
+    }
 }

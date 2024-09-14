@@ -38,11 +38,11 @@ class ProductsController extends BaseController
     {
         $data = $this->request->getPost();
 
+        $images = $this->request->getFiles();
         $p_name        = $data['name'] ?? null;
         $p_description = $data['description'] ?? null;
         $p_price       = $data['price'] ?? null;
         $p_stock       = $data['stock'] ?? null;
-        $p_image       = $data['image'] ;
         $p_type        = $data['type'] ?? null;
         $c_id          = $data['c_id'] ?? null;
 
@@ -52,6 +52,17 @@ class ProductsController extends BaseController
 
         if($p_name === " " || $p_description === " " || $p_price === " " || $p_stock === " " || $p_type === " ") {
             return $this->fail("需輸入商品完整資訊", 404);
+        }
+
+        $p_image = [];
+        if (isset($images['image'])) {
+            foreach ($images['image'] as $img) {
+                if ($img->isValid() && !$img->hasMoved()) {
+                    $newName = $img->getRandomName();
+                    $img->move(WRITEPATH . 'backend\public\uploads\products', $newName);
+                    array_push($p_image,$newName);
+                }
+            }
         }
 
         if($c_id == 0) {
