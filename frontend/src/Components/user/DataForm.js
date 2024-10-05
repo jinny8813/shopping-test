@@ -3,6 +3,10 @@ import { Button, Checkbox, Form, Input, Select, Space } from "antd";
 const DataForm = () => {
   const options = [
     {
+      value: "Keelung",
+      label: "基隆市",
+    },
+    {
       value: "Taipei",
       label: "臺北市",
     },

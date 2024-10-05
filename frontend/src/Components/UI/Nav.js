@@ -3,8 +3,8 @@ import { Header } from "antd/es/layout/layout";
 import { UserOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
-import { GoogleLogin } from "@react-oauth/google";
-import LineButton from "./LineButton";
+// import { GoogleLogin } from "@react-oauth/google";
+// import LineButton from "./LineButton";
 
 const Nav = () => {
   const items = [
@@ -34,25 +34,25 @@ const Nav = () => {
       label: "常見問題",
       key: "question",
     },
-    {
-      label: (
-        <GoogleLogin
-          onSuccess={(credentialResponse) => {
-            console.log(credentialResponse);
-          }}
-          onError={() => {
-            console.log("Login Failed");
-          }}
-        />
-      ),
-      key: "google",
-      style: { padding: "0px", margin: "0px 16px", borderRadius: "5px" },
-    },
-    {
-      label: <LineButton />,
-      key: "line",
-      style: { padding: "0px", margin: "0px 16px", borderRadius: "5px" },
-    },
+    // {
+    //   label: (
+    //     <GoogleLogin
+    //       onSuccess={(credentialResponse) => {
+    //         console.log(credentialResponse);
+    //       }}
+    //       onError={() => {
+    //         console.log("Login Failed");
+    //       }}
+    //     />
+    //   ),
+    //   key: "google",
+    //   style: { padding: "0px", margin: "0px 16px", borderRadius: "5px" },
+    // },
+    // {
+    //   label: <LineButton />,
+    //   key: "line",
+    //   style: { padding: "0px", margin: "0px 16px", borderRadius: "5px" },
+    // },
     {
       label: <Link to="user">會員中心</Link>,
       key: "user",

@@ -60,7 +60,7 @@ const Store = () => {
     const data = await response.json();
 
     setProducts(data.data);
-    console.log(products);
+    console.log(data.data);
   }
 
   useEffect(() => {
