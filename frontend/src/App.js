@@ -16,51 +16,59 @@ import UserRegister from './views/UserRegister.js'
 import UserHistory from './views/UserHistory.js'
 import UserSettings from './views/UserSettings.js'
 
+import Layout from './components/Layout.js';
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
-  },
-  {
-    path: "/faqs",
-    element: <FAQs />,
-  },
-  {
-    path: "/terms",
-    element: <Terms />,
-  },
-  {
-    path: "/store",
-    element: <Store />,
-  },
-  {
-    path: "/store/:id",
-    element: <StoreItemPage />,
-  },
-  {
-    path: "/shopping/cart",
-    element: <ShoppingCart />,
-  },
-  {
-    path: "/shopping/pay",
-    element: <ShoppingPay />,
-  },
-  {
-    path: "/user/login",
-    element: <UserLogin />,
-  },
-  {
-    path: "/user/register",
-    element: <UserRegister />,
-  },
-  {
-    path: "/user/history",
-    element: <UserHistory />,
-  },
-  {
-    path: "/user/settings",
-    element: <UserSettings />,
-  },
+    element: <Layout />,
+    children: [
+      { 
+        index: true, 
+        element: <Home /> 
+      },
+      {
+        path: "/faqs",
+        element: <FAQs />,
+      },
+      {
+        path: "/terms",
+        element: <Terms />,
+      },
+      {
+        path: "/store",
+        element: <Store />,
+      },
+      {
+        path: "/store/:id",
+        element: <StoreItemPage />,
+      },
+      {
+        path: "/shopping/cart",
+        element: <ShoppingCart />,
+      },
+      {
+        path: "/shopping/pay",
+        element: <ShoppingPay />,
+      },
+      {
+        path: "/user/login",
+        element: <UserLogin />,
+      },
+      {
+        path: "/user/register",
+        element: <UserRegister />,
+      },
+      {
+        path: "/user/history",
+        element: <UserHistory />,
+      },
+      {
+        path: "/user/settings",
+        element: <UserSettings />,
+      },
+    ]
+  }
 ]);
 
 function App() {
