@@ -1,0 +1,54 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 50px;
+    background-color: var(--base-600);
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+}
+
+.header-logo-text {
+    font-weight: 400;
+    color: var(--base);
+}
+
+.header-nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-nav-profile {
+    display: flex;
+    gap: 5px;
+}
+
+.header-nav-profile-image {
+    height: 35px;
+    width: 35px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.header-nav-profile-name {
+    line-height: 1rem;
+    margin: 0px;
+    color: var(--base);
+    font-weight: 500;
+}
+
+.header-nav-profile-greeting {
+    margin: 0px;
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--base-300)
+}
+
+.header-nav-link {
+    text-decoration: none;
+    font-weight: 300;
+    color: var(--base)
+}
