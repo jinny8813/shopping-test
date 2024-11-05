@@ -4,7 +4,7 @@ export default function Header({ signedIn = true }) {
     return (
         <header className='header'>
             <div className='header-logo'>
-                <img src="/assets/logo.png" height={40}></img>
+                <img className='header-logo-image' src="/assets/logo.png"></img>
                 <h3 className='header-logo-text'>騏騏資訊</h3>
             </div>
             <nav className='header-nav'>

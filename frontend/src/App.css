@@ -11,9 +11,14 @@
     align-items: center;
 }
 
+.header-logo-image {
+    height: 38px;
+}
+
 .header-logo-text {
     font-weight: 400;
     color: var(--base);
+    margin: 15px 0px;
 }
 
 .header-nav {
