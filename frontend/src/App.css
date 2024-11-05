@@ -1,3 +1,4 @@
+/* Layout 元件的 CSS */
 .header {
     display: flex;
     justify-content: space-between;
@@ -51,4 +52,29 @@
     text-decoration: none;
     font-weight: 300;
     color: var(--base)
+}
+
+/* Home 元件的 CSS */
+.home-main {
+    width: 1000px;
+    margin: 0px auto;
+    padding: 30px 0px 0px;
+}
+
+.home-hero-banner {
+    height: 400px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.home-newest {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+}
+
+.home-newest-title {
+    font-weight: 400;
 }
