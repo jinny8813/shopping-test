@@ -10,6 +10,7 @@ export default function Home() {
                     <StoreItem />
                     <StoreItem />
                     <StoreItem />
+                    <StoreItem />
                 </div>
             </div>
         </main>

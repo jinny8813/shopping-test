@@ -62,7 +62,7 @@
 }
 
 .home-hero-banner {
-    height: 400px;
+    height: 350px;
     width: 100%;
     object-fit: cover;
 }
@@ -77,25 +77,26 @@
 
 .home-newest-title {
     font-weight: 400;
+    margin: 30px 0px 10px;
 }
 
 .home-newest-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 17px;
 }
 
 /* StoreItem 元件的 CSS */
 .store-item {
-    max-width: calc(33.333% - 15px);
+    max-width: calc(25% - 15px);
     background-color: white;
-    border: 1.5px solid var(--base-300);
-    flex: 1 1 calc(33.333% - 15px);
+    border: 1px solid var(--base-300);
+    flex: 1 1 calc(25% - 15px);
 }
 
 .store-item-title {
     font-weight: 600;
-    margin: 10px;
+    margin: 7px;
 }
 
 .store-item-image {
@@ -106,14 +107,14 @@
 
 .store-item-description {
     font-weight: 300;
-    margin: 10px 10px 0px;
+    margin: 7px;
 }
 
 .store-item-bottom {
     display: flex;
     justify-content: end;
     align-items: center;
-    margin: 0px 12px 12px;
+    margin: 10px 9px 9px;
     gap: 5px;
 }
 
@@ -133,4 +134,9 @@
     border: none;
     background-color: var(--primary);
     color: var(--primary-content)
+}
+
+.store-item-bottom-btn-icon {
+    font-weight: 900;
+    stroke-width: 100;
 }
