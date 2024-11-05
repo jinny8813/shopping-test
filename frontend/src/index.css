@@ -1,13 +1,19 @@
 * {
-  --base: #FFFFFF;
-  --base-600: #4B5563;
-  --base-content: #000000;
-  --primary: #C65A1B;
-  --primary-content: #FFFFFF;
+  --base: #f9fafb;
+  --base-300: #d1d5db;
+  --base-600: #4b5563;
+  --base-content: #030712;
+  --primary: #f97316;
+  --primary-content: #fff7ed;
 
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
     'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
     'Noto Color Emoji';
+}
+
+body {
+  margin: 0px;
+  background-color: var(--base);
 }
 
 .base {
