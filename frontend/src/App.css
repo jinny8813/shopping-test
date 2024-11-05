@@ -78,3 +78,59 @@
 .home-newest-title {
     font-weight: 400;
 }
+
+.home-newest-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+/* StoreItem 元件的 CSS */
+.store-item {
+    max-width: calc(33.333% - 15px);
+    background-color: white;
+    border: 1.5px solid var(--base-300);
+    flex: 1 1 calc(33.333% - 15px);
+}
+
+.store-item-title {
+    font-weight: 600;
+    margin: 10px;
+}
+
+.store-item-image {
+    width: 100%;
+    aspect-ratio: 5 / 4;
+    object-fit: cover;
+}
+
+.store-item-description {
+    font-weight: 300;
+    margin: 10px 10px 0px;
+}
+
+.store-item-bottom {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin: 0px 12px 12px;
+    gap: 5px;
+}
+
+.store-item-bottom-price {
+    font-weight: 600;
+    margin: 0px;
+}
+
+.store-item-bottom-price-sign {
+    font-size: 14px;
+}
+
+.store-item-bottom-btn {
+    padding: 5px 6px;
+    font-size: 14px;
+    font-weight: 400;
+    border: none;
+    background-color: var(--primary);
+    color: var(--primary-content)
+}
