@@ -13,7 +13,7 @@ export default function Header({ signedIn = true }) {
                 <Link className='header-nav-link' to={'/terms'}>訂購須知</Link>
                 {signedIn ?
                     <div className='header-nav-profile'>
-                        <img className='header-nav-profile-image' src='/assets/jjs.jpg'></img>
+                        <img className='header-nav-profile-image' src='/assets/kp.jpg'></img>
                         <div>
                             <strong className='header-nav-profile-name'>柯文哲</strong>
                             <p className='header-nav-profile-greeting'>歡迎回來,貴客</p>
