@@ -59,7 +59,7 @@
     color: var(--base)
 }
 
-/* Home 元件的 CSS */
+/* Home 頁面的 CSS */
 .home-main {
     width: 950px;
     margin: 0px auto;
@@ -90,6 +90,41 @@
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 17px;
+}
+
+/* Store 頁面的 CSS */
+
+/* StoreFilters 元件的 CSS */
+.store-filters {
+    background-color: var(--base-600);
+}
+
+.store-filters-inner {
+    width: min(100%, 950px);
+    margin: 0px auto;
+    padding: 10px 0px 20px;
+}
+
+.store-filters-title {
+    margin: 0px;
+    color: var(--base);
+    font-weight: 600;
+}
+
+.store-filters-content {
+    width: 100%;
+    display: flex;
+    gap: 15px;
+    padding: 10px 0px;
+}
+
+.store-filters-content-select {
+    min-width: 0;
+    flex: 1;
+    border: 1px solid var(--base-300);
+    border-radius: 0px;
+    font-size: 14px;
+    padding: 4px;
 }
 
 /* StoreItem 元件的 CSS */

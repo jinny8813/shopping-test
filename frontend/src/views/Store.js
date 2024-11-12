@@ -1,9 +1,13 @@
+import React from 'react'
+
 import StoreFilters from '../components/StoreFilters'
 
 export default function Store() {
     return (
-        <main>
+        <React.Fragment>
             <StoreFilters />
-        </main>
+            <main className='store-main'>
+            </main>
+        </React.Fragment>
     )
 }
