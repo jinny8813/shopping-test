@@ -1,5 +1,9 @@
+import StoreFilters from '../components/StoreFilters'
+
 export default function Store() {
     return (
-        <main></main>
+        <main>
+            <StoreFilters />
+        </main>
     )
 }
