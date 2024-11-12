@@ -100,7 +100,7 @@
 }
 
 .store-filters-inner {
-    width: min(100%, 950px);
+    width: min(calc(100% - 100px), 950px);
     margin: 0px auto;
     padding: 10px 0px 20px;
 }
@@ -108,14 +108,22 @@
 .store-filters-title {
     margin: 0px;
     color: var(--base);
-    font-weight: 600;
+    font-weight: 500;
+}
+
+.store-filters-bottom {
+    width: 100%;
+    display: flex;
+    gap: 80px;
+    align-items: center;
 }
 
 .store-filters-content {
-    width: 100%;
+    min-width: 0;
     display: flex;
     gap: 15px;
     padding: 10px 0px;
+    flex: 15;
 }
 
 .store-filters-content-select {
@@ -125,6 +133,14 @@
     border-radius: 0px;
     font-size: 14px;
     padding: 4px;
+}
+
+.store-filters-btn {
+    padding: 2px 8px;
+    font-size: 16px;
+    font-weight: 300;
+    flex-shrink: 0;
+    flex: 1;
 }
 
 /* StoreItem 元件的 CSS */
