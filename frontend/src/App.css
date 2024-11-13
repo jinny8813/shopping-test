@@ -86,13 +86,19 @@
 }
 
 .home-newest-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 17px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 25px;
 }
 
 /* Store 頁面的 CSS */
+.store-main {
+    width: 950px;
+    margin: 45px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 35px 25px;
+}
 
 /* StoreFilters 元件的 CSS */
 .store-filters {
@@ -145,10 +151,9 @@
 
 /* StoreItem 元件的 CSS */
 .store-item {
-    max-width: 31%;
     background-color: white;
     border: 1px solid var(--base-300);
-    flex: 1 1 31%;
+    flex: 1;
 }
 
 .store-item-title {
