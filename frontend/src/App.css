@@ -67,6 +67,52 @@
     font-weight: 200;
 }
 
+/* Terms 頁面的 CSS */
+.terms-main {
+    width: 950px;
+    margin: 50px auto;
+    border: 1px solid var(--base-300);
+    background-color: white;
+    padding: 20px;
+    font-weight: 300;
+    box-sizing: border-box;
+}
+
+.terms-title {
+    margin: 0px;
+}
+
+.terms-list {
+    padding-inline-start: 23px;
+}
+
+.terms-end {
+    text-align: end;
+}
+
+.terms-end-title {
+    font-weight: 500;
+    margin: 0px;
+}
+
+.terms-end-logo {
+    width: 200px;
+    margin: 0px 0px 0px auto;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    font-weight: 300;
+}
+
+.terms-end-logo {
+    font-size: 20px;
+    margin-right: 6px;
+}
+
+.terms-end-logo-img {
+    height: 35px;
+}
+
 /* Accordion 元件的 CSS */
 .accordion {
     width: 100%;
