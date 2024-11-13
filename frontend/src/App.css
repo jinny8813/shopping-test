@@ -1,4 +1,117 @@
-/* Layout 元件的 CSS */
+/* Home 頁面的 CSS */
+.home-main {
+    width: 950px;
+    margin: 0px auto;
+    padding: 50px 0px 0px;
+}
+
+.home-hero-banner {
+    height: 420px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.home-newest {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+}
+
+.home-newest-title {
+    font-weight: 600;
+    margin: 40px 0px 15px;
+}
+
+.home-newest-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 25px;
+}
+
+/* Store 頁面的 CSS */
+.store-main {
+    width: 950px;
+    margin: 45px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 35px 25px;
+}
+
+/* FAQs 頁面的 CSS */
+.faqs-main {
+    max-width: 950px;
+    margin: 50px auto;
+    background-color: white;
+    border: 1px solid var(--base-300);
+    box-sizing: border-box;
+}
+
+.faqs-heading {
+    padding: 20px;
+    background-color: var(--base-600);
+    color: white;
+}
+
+.faqs-heading-title, .faqs-heading-subtitle {
+    margin: 0px;
+}
+
+.faqs-heading-title {
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.faqs-heading-subtitle {
+    font-weight: 200;
+}
+
+/* Accordion 元件的 CSS */
+.accordion {
+    width: 100%;
+}
+
+.accordion-item {
+    border-top: 1px solid var(--base-300);
+}
+
+.accordion-header {
+    padding: 15px 20px;
+    background-color: white;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.accordion-header:hover {
+    background-color: var(--base-300);
+}
+
+.accordion-icon {
+    font-size: 18px;
+    transition: transform 0.2s ease;
+}
+
+.accordion-icon.open {
+    transform: rotate(180deg);
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    padding: 0 20px;
+}
+
+.accordion-content.active {
+    max-height: 500px;
+    padding: 20px;
+}
+
+/* Header 元件的 CSS */
 .header {
     display: flex;
     justify-content: space-between;
@@ -57,47 +170,6 @@
     text-decoration: none;
     font-weight: 300;
     color: var(--base)
-}
-
-/* Home 頁面的 CSS */
-.home-main {
-    width: 950px;
-    margin: 0px auto;
-    padding: 50px 0px 0px;
-}
-
-.home-hero-banner {
-    height: 420px;
-    width: 100%;
-    object-fit: cover;
-}
-
-.home-newest {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    justify-content: start;
-}
-
-.home-newest-title {
-    font-weight: 600;
-    margin: 40px 0px 15px;
-}
-
-.home-newest-list {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 25px;
-}
-
-/* Store 頁面的 CSS */
-.store-main {
-    width: 950px;
-    margin: 45px auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 35px 25px;
 }
 
 /* StoreFilters 元件的 CSS */
