@@ -4,8 +4,10 @@ export default function Header({ signedIn = true }) {
     return (
         <header className='header'>
             <div className='header-logo'>
-                <img className='header-logo-image' src="/assets/logo.png"></img>
-                <h3 className='header-logo-text'>騏騏資訊</h3>
+                <Link className='header-logo' to={'/'}>
+                    <img className='header-logo-image' src="/assets/logo.png"></img>
+                    <h3 className='header-logo-text'>騏騏資訊</h3>
+                </Link>
             </div>
             <nav className='header-nav'>
                 <Link className='header-nav-link' to={'/store'}>線上商店</Link>
