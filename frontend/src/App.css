@@ -15,8 +15,8 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: start;
-    justify-content: start;
+    align-items: flex-start;
+    justify-content: flex-start;
 }
 
 .home-newest-title {
@@ -87,7 +87,7 @@
 }
 
 .terms-end {
-    text-align: end;
+    text-align: flex-end;
 }
 
 .terms-end-title {
@@ -100,7 +100,7 @@
     margin: 0px 0px 0px auto;
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-end;
     font-weight: 300;
 }
 
@@ -292,7 +292,7 @@
 
 .store-item-bottom {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
     margin: 10px;
     gap: 5px;
