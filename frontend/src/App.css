@@ -168,6 +168,7 @@
 .header-logo {
     display: flex;
     align-items: center;
+    text-decoration: none;
 }
 
 .header-logo-image {
