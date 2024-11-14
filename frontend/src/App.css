@@ -1,3 +1,32 @@
+/* FAQs 頁面的 CSS */
+.faqs-main {
+    max-width: 950px;
+    margin: 50px auto;
+    background-color: white;
+    border: 1px solid var(--base-300);
+    box-sizing: border-box;
+}
+
+.faqs-heading {
+    padding: 20px;
+    background-color: var(--base-600);
+    color: white;
+}
+
+.faqs-heading-title,
+.faqs-heading-subtitle {
+    margin: 0px;
+}
+
+.faqs-heading-title {
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.faqs-heading-subtitle {
+    font-weight: 200;
+}
+
 /* Home 頁面的 CSS */
 .home-main {
     width: 950px;
@@ -39,32 +68,108 @@
     gap: 35px 25px;
 }
 
-/* FAQs 頁面的 CSS */
-.faqs-main {
-    max-width: 950px;
+/* StoreItemPage 頁面的 CSS */
+.store-item-page {
+    width: 950px;
     margin: 50px auto;
     background-color: white;
     border: 1px solid var(--base-300);
+    padding: 25px;
     box-sizing: border-box;
 }
 
-.faqs-heading {
-    padding: 20px;
-    background-color: var(--base-600);
-    color: white;
+.store-item-page-listing {
+    display: flex;
+    gap: 25px;
 }
 
-.faqs-heading-title, .faqs-heading-subtitle {
+.store-item-page-listing-image-container {
+    flex: 5;
+}
+
+.store-item-page-listing-image {
+    height: 100%;
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+}
+
+.store-item-page-listing-info {
+    flex: 6;
+    display: flex;
+    flex-direction: column;
+}
+
+.store-item-page-listing-info-name {
+    font-size: 24px;
+    font-weight: 600;
     margin: 0px;
 }
 
-.faqs-heading-title {
-    font-weight: 500;
-    margin-bottom: 10px;
+.store-item-page-listing-info-description {
+    color: var(--base-600);
+    margin: 5px 0px 20px;
 }
 
-.faqs-heading-subtitle {
-    font-weight: 200;
+.store-item-page-listing-info-price {
+    margin: 0px;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.store-item-page-specifications-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--base-300);
+    margin-top: 20px;
+}
+
+.store-item-page-specifications-table th, td {
+    border: 1px solid var(--base-300);
+    padding: 7px;
+}
+
+.store-item-page-specifications-table th[scope='col'] {
+    background-color: var(--base-300);
+    font-weight: 500;
+}
+
+.store-item-page-specifications-table th[scope='col']:not(:last-child) {
+    border-right: 1px solid var(--base);
+}
+
+.store-item-page-specifications-table-header-field {
+    width: 35%;
+}
+
+.store-item-page-specifications-table th[scope='row'] {
+    font-weight: 300;
+    color: var(--base-600);
+}
+
+.store-item-page-specifications-table td {
+    font-weight: 300;
+}
+
+.store-item-page-listing-info-quantity {
+    width: 105px;
+    margin-top: 20px;
+    border-radius: 0px !important;
+}
+
+.store-item-page-listing-info-quantity * {
+    border-radius: 0px !important;
+}
+
+.store-item-page-listing-info-cart {
+    width: 105px;
+    padding: 7px 0px;
+    background-color: var(--primary);
+    border: none;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--primary-content);
+    margin-top: 10px;
 }
 
 /* Terms 頁面的 CSS */
@@ -282,7 +387,7 @@
 
 .store-item-image {
     width: 100%;
-    aspect-ratio: 5 / 4;
+    aspect-ratio: 1;
     object-fit: cover;
 }
 
