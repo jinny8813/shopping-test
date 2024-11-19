@@ -292,6 +292,27 @@ td {
     font-size: 14px;
 }
 
+.user-register-form-thirdp-google {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.user-register-form-thirdp-google-logo {
+    height: 60%;
+    object-fit: cover;
+    padding: 0px 3%;
+}
+
+.user-register-form-thirdp-google-text {
+    width: 100%;
+    font-weight: 500;
+    color: var(--base-600);
+    font-size: 14px;
+}
+
 .user-register-form-btn {
     flex-grow: 0;
     width: 95px;
