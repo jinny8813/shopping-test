@@ -1,4 +1,4 @@
-import { ShoppingCartOutlined, ReloadOutlined } from '@ant-design/icons'
+import { ShoppingCartOutlined, ReloadOutlined, CreditCardFilled } from '@ant-design/icons'
 import { InputNumber } from 'antd'
 import { Link } from 'react-router-dom'
 
@@ -29,15 +29,17 @@ const items = [
     }
 ]
 
+const totalPrice = items.reduce((sum, item) => sum + item.price, 0);
+
 export default function ShoppingCart() {
     const cartItems = items.map(item =>
         <tr class='shopping-cart-item'>
             <td width={150} className='shopping-cart-item-image'><img className='shopping-cart-item-image-core' src={item.image}></img></td>
             <td width={100} className='shopping-cart-item-name'>{item.name}</td>
-            <td width={50} className='shopping-cart-item-price'>{item.price}元</td>
+            <td width={55} className='shopping-cart-item-price'><span>{item.price}</span><span>元</span></td>
             <td width={150} className='shopping-cart-item-description'>{item.description}</td>
-            <td className='shopping-cart-item-quantity'>
-                <InputNumber className='shopping-cart-item-quantity-core' addonBefore="數量" defaultValue={item.quantity} />
+            <td width={55} className='shopping-cart-item-quantity'>
+                <InputNumber className='shopping-cart-item-quantity-core' defaultValue={item.quantity} />
             </td>
             <td className='shopping-cart-item-link'>
                 <Link className='shopping-cart-item-link-core' to={`/store/${item.id}`}><ReloadOutlined /> 回產品頁面</Link>
@@ -65,7 +67,18 @@ export default function ShoppingCart() {
                 </tbody>
             </table>
             <div class='shopping-cart-bottom'>
-
+                <table class='shopping-cart-items'>
+                    <tbody>
+                        <td width={150} className='shopping-cart-item-image'></td>
+                        <td width={100} className='shopping-cart-item-name'></td>
+                        <td width={55} className='shopping-cart-item-price'><span>{totalPrice}</span><span>元</span></td>
+                        <td width={150} className='shopping-cart-item-description'></td>
+                        <td className='shopping-cart-item-quantity'></td>
+                        <td className='shopping-cart-item-link'>
+                            <button class='shopping-cart-checkout-btn'><CreditCardFilled /> 結帳</button>
+                        </td>
+                    </tbody>
+                </table>
             </div>
         </main>
     )
