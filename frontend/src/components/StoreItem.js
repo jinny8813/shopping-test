@@ -11,7 +11,7 @@ export default function StoreItem({ name = '佔位產品', id = 123, image = './
             <p className='store-item-description'>{description}</p>
             <div className='store-item-bottom'>
                 <p className='store-item-bottom-price'>{price}<span className='store-item-bottom-price-sign'>元</span></p>
-                <button className='store-item-bottom-btn'><ShoppingCartOutlined className='store-item-bottom-btn-icon' />加入購物車</button>
+                <button className='store-item-bottom-btn'><ShoppingCartOutlined className='store-item-bottom-btn-icon' /> 加入購物車</button>
             </div>
         </div>
     )
