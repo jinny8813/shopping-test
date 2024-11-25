@@ -60,6 +60,71 @@
     gap: 25px;
 }
 
+/* ShoppingCart 頁面的 CSS */
+.shopping-cart-main {
+    max-width: 950px;
+    margin: 50px auto;
+    background-color: white;
+    border: 1px solid var(--base-300);
+    box-sizing: border-box;
+}
+
+.shopping-cart-top {
+    padding: 20px;
+    border-bottom: 1px solid var(--base-300);
+}
+
+.shopping-cart-top-title {
+    margin: 0px;
+}
+
+.shopping-cart-items {
+    width: 100%;
+    /* table-layout: fixed; */
+    border-spacing: 20px;
+}
+
+.shopping-cart-items th {
+    text-align: left;
+    padding-bottom: 5px;
+}
+
+.shopping-cart-items td {
+    vertical-align: top;
+    border: none;
+    padding: 0px;
+    font-weight: 300;
+}
+
+.shopping-cart-item-image-core {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.shopping-cart-item-quantity {
+    width: 105px;
+}
+
+.shopping-cart-item-quantity * {
+    border-radius: 0px !important;
+}
+
+.shopping-cart-item-link {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+.shopping-cart-item-link-core {
+    text-decoration: none;
+    font-weight: 400;
+    background-color: var(--base-600);
+    color: white;
+    padding: 6px 9px;
+    font-weight: 300;
+}
+
 /* Store 頁面的 CSS */
 .store-main {
     width: 950px;
