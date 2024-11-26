@@ -1,6 +1,15 @@
 import { Link } from 'react-router-dom'
-import { Badge } from 'antd'
+import { Badge, Dropdown } from 'antd'
 import { ShoppingCartOutlined } from '@ant-design/icons'
+
+const profileDropdown = [
+    {
+        key: '1',
+        label: (
+            <Link to={'/user/settings'}>使用者設定</Link>
+        )
+    }
+]
 
 export default function Header({ signedIn = true }) {
     return (
@@ -17,11 +26,15 @@ export default function Header({ signedIn = true }) {
                 <Link className='header-nav-link' to={'/terms'}>訂購須知</Link>
                 {signedIn ?
                     <div className='header-nav-profile'>
-                        <img className='header-nav-profile-image' src='/assets/kp.jpg'></img>
-                        <div>
-                            <strong className='header-nav-profile-name'>柯文哲</strong>
-                            <p className='header-nav-profile-greeting'>歡迎回來,貴客</p>
-                        </div>
+                        <Dropdown menu={{ items: profileDropdown }}>
+                            <div className='header-nav-profile'>
+                                <img className='header-nav-profile-image' src='/assets/kp.jpg'></img>
+                                <div>
+                                    <strong className='header-nav-profile-name'>柯文哲</strong>
+                                    <p className='header-nav-profile-greeting'>歡迎回來,貴客</p>
+                                </div>
+                            </div>
+                        </Dropdown>
                         <Link to={'/shopping/cart'}>
                             <Badge count={3} size='small'>
                                 <ShoppingCartOutlined className='header-nav-profile-cart' />
