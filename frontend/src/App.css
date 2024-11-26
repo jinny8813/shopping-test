@@ -551,8 +551,24 @@ td {
     font-size: 14px;
 }
 
+.user-register-form-bottom {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.user-register-form-link {
+    text-decoration: none;
+    color: var(--base-600);
+}
+
+.user-register-form-link:hover {
+    text-decoration: underline;
+}
+
 .user-register-form-btn {
-    flex-grow: 0;
     width: 95px;
     padding: 7px 0px;
     font-size: 14px;
@@ -561,8 +577,6 @@ td {
     background-color: var(--primary);
     border-radius: 0px;
     border: none;
-    align-self: flex-end;
-    margin-top: 10px;
 }
 
 /* UserSettings 頁面的 CSS */

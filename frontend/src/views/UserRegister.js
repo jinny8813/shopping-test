@@ -1,5 +1,6 @@
 import { SendOutlined, UserOutlined, KeyOutlined, MailOutlined } from "@ant-design/icons"
 import { Input } from "antd"
+import { Link } from 'react-router-dom'
 
 export default function UserRegister() {
     return (
@@ -19,7 +20,10 @@ export default function UserRegister() {
                         <img className="user-register-form-thirdp-google-logo" src="/assets/google.png"></img>
                         <span className="user-register-form-thirdp-google-text">使用Google帳號登入</span></button>
                 </div>
-                <button className="user-register-form-btn"><SendOutlined /> 註冊帳號</button>
+                <div className='user-register-form-bottom'>
+                    <Link className='user-register-form-link' to={'/user/login'}>還沒辦帳號嗎？</Link>
+                    <button className="user-register-form-btn"><SendOutlined /> 註冊帳號</button>
+                </div>
             </form>
         </main>
     )

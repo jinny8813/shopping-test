@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Badge, Dropdown } from 'antd'
-import { ShoppingCartOutlined } from '@ant-design/icons'
+import { ShoppingCartOutlined, LoginOutlined } from '@ant-design/icons'
 
 const profileDropdown = [
     {
@@ -11,7 +11,7 @@ const profileDropdown = [
     }
 ]
 
-export default function Header({ signedIn = true }) {
+export default function Header({ signedIn = false }) {
     return (
         <header className='header'>
             <div className='header-logo'>
@@ -42,7 +42,7 @@ export default function Header({ signedIn = true }) {
                         </Link>
                     </div>
                     :
-                    <Link className='header-nav-link' to={'/register'}>登入/註冊？</Link>
+                    <Link className='header-nav-link' to={'user/login'}><LoginOutlined /> 登入/註冊</Link>
                 }
             </nav>
         </header>
