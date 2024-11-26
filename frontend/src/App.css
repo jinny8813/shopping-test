@@ -140,6 +140,89 @@
     background-color: var(--primary);
 }
 
+/* ShoppingPay 頁面的 CSS */
+.shopping-pay-main {
+    max-width: 950px;
+    margin: 50px auto;
+    background-color: white;
+    border: 1px solid var(--base-300);
+    box-sizing: border-box;
+}
+
+.shopping-pay-title {
+    padding: 20px;
+    margin: 0px;
+    border-bottom: 1px solid var(--base-300);
+}
+
+.shopping-pay-options {
+    width: min-content;
+    margin: 0px auto;
+    display: flex;
+    flex-direction: column;
+    padding: 40px 0px 20px;
+    gap: 10px;
+}
+
+.shopping-pay-option {
+    width: 300px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.shopping-pay-option-input {
+    scale: 1.2;
+}
+
+.shopping-pay-option-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 300;
+}
+
+.line-pay-logo {
+    width: 50px;
+    height: 50px;
+    border: 0.1px solid var(--base-300);
+    padding: 3px;
+    box-sizing: border-box;
+}
+
+.jko-pay-logo {
+    width: 50px;
+    height: 50px;
+    box-sizing: border-box;
+}
+
+.apple-pay-logo {
+    width: 50px;
+    height: 50px;
+    box-sizing: border-box;
+    padding: 5px;
+    object-fit: contain;
+    border: 0.1px solid var(--base-300);
+}
+
+.shopping-pay-bottom {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0px 20px 20px;
+    box-sizing: border-box;
+}
+
+.shopping-pay-btn {
+    padding: 6px 9px;
+    font-size: 16px;
+    font-weight: 400;
+    border: none;
+    color: var(--primary-content);
+    background-color: var(--primary);
+}
+
 /* Store 頁面的 CSS */
 .store-main {
     width: 950px;
