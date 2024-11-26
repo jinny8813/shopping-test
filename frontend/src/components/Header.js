@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom'
+import { Badge } from 'antd'
+import { ShoppingCartOutlined } from '@ant-design/icons'
 
 export default function Header({ signedIn = true }) {
     return (
@@ -20,6 +22,11 @@ export default function Header({ signedIn = true }) {
                             <strong className='header-nav-profile-name'>柯文哲</strong>
                             <p className='header-nav-profile-greeting'>歡迎回來,貴客</p>
                         </div>
+                        <Link to={'/shopping/cart'}>
+                            <Badge count={3} size='small'>
+                                <ShoppingCartOutlined className='header-nav-profile-cart' />
+                            </Badge>
+                        </Link>
                     </div>
                     :
                     <Link className='header-nav-link' to={'/register'}>登入/註冊？</Link>

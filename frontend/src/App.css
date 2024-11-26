@@ -700,6 +700,7 @@ td {
 .header-nav-profile {
     display: flex;
     gap: 5px;
+    align-items: center;
 }
 
 .header-nav-profile-image {
@@ -721,6 +722,11 @@ td {
     font-size: 12px;
     font-weight: 300;
     color: var(--base-300)
+}
+
+.header-nav-profile-cart {
+    font-size: 24px;
+    color: var(--base-300);
 }
 
 .header-nav-link {

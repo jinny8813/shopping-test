@@ -75,7 +75,9 @@ export default function ShoppingCart() {
                         <td width={150} className='shopping-cart-item-description'></td>
                         <td className='shopping-cart-item-quantity'></td>
                         <td className='shopping-cart-item-link'>
-                            <button class='shopping-cart-checkout-btn'><CreditCardFilled /> 結帳</button>
+                            <Link to={'/shopping/pay'}>
+                                <button class='shopping-cart-checkout-btn'><CreditCardFilled /> 結帳</button>
+                            </Link>
                         </td>
                     </tbody>
                 </table>
