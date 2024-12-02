@@ -681,6 +681,20 @@ td {
     padding: 20px;
 }
 
+/* Footer 元件的 CSS */
+.footer {
+    background-color: var(--base-600);
+    color: var(--base-300);
+    padding: 15px 0px;
+    display: flex;
+    justify-content: center;
+}
+
+.footer-text {
+    font-weight: 300;
+    margin: 0px;
+}
+
 /* Header 元件的 CSS */
 .header {
     display: flex;
