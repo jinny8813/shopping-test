@@ -44,7 +44,7 @@ services:
       - DB_HOST=db
       - DB_USER=devuser
       - DB_PASSWORD=devpass
-      - DB_NAME=myapp
+      - DB_NAME=shopping
 
   db:
     image: mysql:8.0
@@ -52,7 +52,7 @@ services:
       - "3306:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=rootpass
-      - MYSQL_DATABASE=myapp
+      - MYSQL_DATABASE=shopping
       - MYSQL_USER=devuser
       - MYSQL_PASSWORD=devpass
     volumes:
