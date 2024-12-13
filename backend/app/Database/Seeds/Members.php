@@ -20,7 +20,6 @@ class Members extends Seeder
                 "m_fb"       => null,
                 "m_name"     => null,
                 "m_phone"    => null,
-                "m_address"  => null,
                 "created_at" => $now,
                 "updated_at" => $now,
             ],
