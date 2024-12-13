@@ -24,5 +24,13 @@ WORKDIR /var/www/html
 # 複製專案檔案
 COPY . .
 
+# 設置 Apache 配置
+COPY docker/apache.conf /etc/apache2/sites-available/000-default.conf
+
 # 設置權限
-RUN chown -R www-data:www-data /var/www/html
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 755 /var/www/html \
+    && chmod -R 777 /var/www/html/writable
+
+# 啟用 Apache 配置
+RUN a2ensite 000-default.conf
