@@ -1,74 +1,82 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { GoogleOAuthProvider } from "@react-oauth/google";
+import React from 'react'
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import './App.css'
 
-import { FloatButton } from "antd";
-import LineIcon from "./Components/UI/btn_base.png";
-import "./App.css";
-import Root from "./Page/Layout/Root";
-import Home from "./Page/Home";
-import { Store as HostStore } from "./Page/host/Store";
-import Host from "./Page/host/Host";
-import Product from "./Page/Product";
-import Store from "./Page/Store";
-import Cart from "./Page/Cart";
-import User from "./Page/User";
-import PaymentSuccess from "./Page/PaymentSuccess";
+import Home from './views/Home.js'
+import FAQs from './views/FAQs.js'
+import Terms from './views/Terms.js'
+import Store from './views/Store.js'
+import StoreItemPage from './views/StoreItemPage.js'
+import ShoppingCart from './views/ShoppingCart.js'
+import ShoppingPay from './views/ShoppingPay.js'
+import UserLogin from './views/UserLogin.js'
+import UserRegister from './views/UserRegister.js'
+import UserHistory from './views/UserHistory.js'
+import UserSettings from './views/UserSettings.js'
+
+import Layout from './components/Layout.js';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root />,
+    element: <Layout />,
     children: [
-      { index: true, element: <Home /> },
-      {
-        path: "host_store",
-        element: <HostStore />,
+      { 
+        index: true, 
+        element: <Home /> 
       },
       {
-        path: "host_store/:hostId",
-        element: <Host />,
+        path: "/faqs",
+        element: <FAQs />,
       },
       {
-        path: "store",
+        path: "/terms",
+        element: <Terms />,
+      },
+      {
+        path: "/store",
         element: <Store />,
       },
       {
-        path: "store/:productId",
-        element: <Product />,
+        path: "/store/:id",
+        element: <StoreItemPage />,
       },
       {
-        path: "user",
-        element: <User />,
+        path: "/shopping/cart",
+        element: <ShoppingCart />,
       },
       {
-        path: "cart",
-        element: <Cart />,
+        path: "/shopping/pay",
+        element: <ShoppingPay />,
       },
       {
-        path: "pay-success",
-        element: <PaymentSuccess />,
+        path: "/user/login",
+        element: <UserLogin />,
       },
-    ],
-  },
+      {
+        path: "/user/register",
+        element: <UserRegister />,
+      },
+      {
+        path: "/user/history",
+        element: <UserHistory />,
+      },
+      {
+        path: "/user/settings",
+        element: <UserSettings />,
+      },
+    ]
+  }
 ]);
 
 function App() {
   return (
-    <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_ID}>
-      <FloatButton
-        shape="square"
-        type="primary"
-        style={{
-          right: 24,
-        }}
-        icon={
-          <a href="https://lin.ee/MTCAaGA" target="blank">
-            <img src={`${LineIcon}`} style={{ width: "100%" }} />
-          </a>
-        }
-      />
+    <React.StrictMode>
       <RouterProvider router={router} />
-    </GoogleOAuthProvider>
+    </React.StrictMode>
   );
 }
 

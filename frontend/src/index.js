@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { CartProvider } from "./Hooks/useCart";
+import { CartProvider } from "./hooks/useCart";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";

@@ -1,38 +1,868 @@
-.App {
-  text-align: center;
+/* 頁面的 CSS 在這裏開始！ */
+/* FAQs 頁面的 CSS */
+.faqs-main {
+    max-width: 950px;
+    margin: 50px auto;
+    background-color: white;
+    border: 1px solid var(--base-300);
+    box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.faqs-heading {
+    padding: 20px;
+    background-color: var(--base-600);
+    color: white;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.faqs-heading-title,
+.faqs-heading-subtitle {
+    margin: 0px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.faqs-heading-title {
+    font-weight: 500;
+    margin-bottom: 10px;
 }
 
-.App-link {
-  color: #61dafb;
+.faqs-heading-subtitle {
+    font-weight: 200;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Home 頁面的 CSS */
+.home-main {
+    width: 950px;
+    margin: 0px auto;
+    padding: 50px 0px;
+}
+
+.home-hero-banner {
+    height: 420px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.home-newest {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.home-newest-title {
+    font-weight: 600;
+    margin: 40px 0px 15px;
+}
+
+.home-newest-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 25px;
+}
+
+/* ShoppingCart 頁面的 CSS */
+.shopping-cart-main {
+    max-width: 950px;
+    margin: 50px auto;
+    background-color: white;
+    border: 1px solid var(--base-300);
+    box-sizing: border-box;
+}
+
+.shopping-cart-top {
+    padding: 20px;
+    border-bottom: 1px solid var(--base-300);
+}
+
+.shopping-cart-top-title {
+    margin: 0px;
+}
+
+.shopping-cart-items {
+    width: 100%;
+    table-layout: auto;
+    border-spacing: 20px;
+    border-bottom: 1px solid var(--base-300);
+}
+
+.shopping-cart-items th {
+    text-align: left;
+    padding-bottom: 5px;
+}
+
+.shopping-cart-items td {
+    vertical-align: top;
+    border: none;
+    padding: 0px;
+    font-weight: 300;
+}
+
+.shopping-cart-item-image-core {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.shopping-cart-item-price {
+    display: flex;
+    justify-content: space-between;
+}
+
+.shopping-cart-item-quantity-core {
+    width: 100%;
+}
+
+.shopping-cart-item-quantity * {
+    border-radius: 0px !important;
+}
+
+.shopping-cart-item-link {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+.shopping-cart-item-link-core {
+    text-decoration: none;
+    font-weight: 400;
+    background-color: var(--base-600);
+    color: white;
+    padding: 6px 9px;
+    font-weight: 300;
+}
+
+.shopping-cart-checkout-btn {
+    padding: 7px 7px 7px 12px;
+    font-size: 14px;
+    font-weight: 300;
+    border: 0px;
+    color: var(--primary-content);
+    background-color: var(--primary);
+}
+
+/* ShoppingPay 頁面的 CSS */
+.shopping-pay-main {
+    max-width: 950px;
+    margin: 50px auto;
+    background-color: white;
+    border: 1px solid var(--base-300);
+    box-sizing: border-box;
+}
+
+.shopping-pay-title {
+    padding: 20px;
+    margin: 0px;
+    border-bottom: 1px solid var(--base-300);
+}
+
+.shopping-pay-options {
+    width: min-content;
+    margin: 0px auto;
+    display: flex;
+    flex-direction: column;
+    padding: 40px 0px 20px;
+    gap: 10px;
+}
+
+.shopping-pay-option {
+    width: 300px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.shopping-pay-option-input {
+    scale: 1.2;
+}
+
+.shopping-pay-option-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 300;
+}
+
+.line-pay-logo {
+    width: 50px;
+    height: 50px;
+    border: 0.1px solid var(--base-300);
+    padding: 3px;
+    box-sizing: border-box;
+}
+
+.jko-pay-logo {
+    width: 50px;
+    height: 50px;
+    box-sizing: border-box;
+}
+
+.apple-pay-logo {
+    width: 50px;
+    height: 50px;
+    box-sizing: border-box;
+    padding: 5px;
+    object-fit: contain;
+    border: 0.1px solid var(--base-300);
+}
+
+.shopping-pay-bottom {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0px 20px 20px;
+    box-sizing: border-box;
+}
+
+.shopping-pay-btn {
+    padding: 6px 9px;
+    font-size: 16px;
+    font-weight: 400;
+    border: none;
+    color: var(--primary-content);
+    background-color: var(--primary);
+}
+
+/* Store 頁面的 CSS */
+.store-main {
+    width: 950px;
+    margin: 45px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 35px 25px;
+}
+
+/* StoreItemPage 頁面的 CSS */
+.store-item-page {
+    width: 950px;
+    margin: 50px auto;
+    background-color: white;
+    border: 1px solid var(--base-300);
+    padding: 25px;
+    box-sizing: border-box;
+}
+
+.store-item-page-listing {
+    display: flex;
+    gap: 25px;
+}
+
+.store-item-page-listing-image-container {
+    flex: 5;
+}
+
+.store-item-page-listing-image {
+    height: 100%;
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+}
+
+.store-item-page-listing-info {
+    flex: 6;
+    display: flex;
+    flex-direction: column;
+}
+
+.store-item-page-listing-info-name {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0px;
+}
+
+.store-item-page-listing-info-description {
+    color: var(--base-600);
+    margin: 5px 0px 20px;
+}
+
+.store-item-page-listing-info-price {
+    margin: 0px;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.store-item-page-specifications-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--base-300);
+    margin-top: 20px;
+}
+
+.store-item-page-specifications-table th,
+td {
+    border: 1px solid var(--base-300);
+    padding: 7px;
+}
+
+.store-item-page-specifications-table th[scope='col'] {
+    background-color: var(--base-300);
+    font-weight: 500;
+}
+
+.store-item-page-specifications-table th[scope='col']:not(:last-child) {
+    border-right: 1px solid var(--base);
+}
+
+.store-item-page-specifications-table-header-field {
+    width: 35%;
+}
+
+.store-item-page-specifications-table th[scope='row'] {
+    font-weight: 300;
+    color: var(--base-600);
+}
+
+.store-item-page-specifications-table td {
+    font-weight: 300;
+}
+
+.store-item-page-listing-info-quantity {
+    width: 105px;
+    margin-top: 20px;
+    border-radius: 0px !important;
+}
+
+.store-item-page-listing-info-quantity * {
+    border-radius: 0px !important;
+}
+
+.store-item-page-listing-info-cart {
+    width: 105px;
+    padding: 7px 0px;
+    background-color: var(--primary);
+    border: none;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--primary-content);
+    margin-top: 10px;
+}
+
+/* Terms 頁面的 CSS */
+.terms-main {
+    width: 950px;
+    margin: 50px auto;
+    border: 1px solid var(--base-300);
+    background-color: white;
+    padding: 20px;
+    font-weight: 300;
+    box-sizing: border-box;
+}
+
+.terms-title {
+    margin: 0px;
+}
+
+.terms-list {
+    padding-inline-start: 23px;
+}
+
+.terms-end {
+    text-align: flex-end;
+}
+
+.terms-end-title {
+    font-weight: 500;
+    margin: 0px;
+}
+
+.terms-end-logo {
+    width: 200px;
+    margin: 0px 0px 0px auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-weight: 300;
+}
+
+.terms-end-logo {
+    font-size: 20px;
+    margin-right: 6px;
+}
+
+.terms-end-logo-img {
+    height: 35px;
+}
+
+/* UserHistory 頁面的 CSS */
+.user-history {
+    width: 950px;
+    margin: 0px auto;
+    border: 1px solid var(--base-300);
+    background-color: white;
+    box-sizing: border-box;
+    margin-top: 50px;
+}
+
+.user-history-top {
+    padding: 20px;
+    border-bottom: 1px solid var(--base-300);
+    display: flex;
+}
+
+.user-history-title {
+    margin: 0px;
+    flex: 1;
+}
+
+.user-history-searchbar {
+    width: 300px;
+}
+
+.user-history-searchbar * {
+    border-radius: 0px !important;
+}
+
+.user-history-table {
+    width: 100%;
+    padding: 20px;
+    font-weight: 300;
+    border-spacing: 0px;
+    table-layout: fixed;
+}
+
+.user-history-table th {
+    text-align: left;
+    padding-bottom: 10px;
+}
+
+.user-history-table td {
+    padding: 0px;
+    border: none;
+    padding-top: 5px;
+}
+
+.status-fail {
+    color: #f87171;
+}
+
+.status-shipping {
+    color: #fbbf24;
+}
+
+.status-arrived {
+    color: #16a34a;
+}
+
+.user-history-table-details {
+    text-align: right;
+    width: 87px;
+}
+
+.user-history-table-details button {
+    padding: 5px 9px;
+    background-color: var(--base-600);
+    color: white;
+    border: none;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+/* UserRegister 頁面的 CSS */
+.user-register-main {
+    width: 350px;
+    margin: 50px auto;
+    background-color: white;
+    border: 1px solid var(--base-300);
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.user-register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.user-register-form-title {
+    margin: 0px;
+}
+
+.user-register-form-inputs {
+    margin: 10px 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.user-register-form-input {
+    font-size: 14px;
+    border-radius: 0px !important;
+}
+
+.user-register-form-input * {
+    border-radius: 0px !important;
+}
+
+.user-register-form-thirdp {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.user-register-form-thirdp-btn {
+    width: 100%;
+    height: 40px;
+    border-radius: 0px;
+    border: 1px solid var(--base-300);
+    background-color: white;
+    padding: 0px;
+}
+
+.user-register-form-thirdp-line {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: #06c755;
+    border-radius: 5px;
+}
+
+.user-register-form-thirdp-line-logo {
+    height: 100%;
+    object-fit: cover;
+    border-right: 1.5px solid #00000015;
+}
+
+.user-register-form-thirdp-line-text {
+    width: 100%;
+    font-weight: 500;
+    color: white;
+    font-size: 14px;
+}
+
+.user-register-form-thirdp-google {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.user-register-form-thirdp-google-logo {
+    height: 60%;
+    object-fit: cover;
+    padding: 0px 3%;
+}
+
+.user-register-form-thirdp-google-text {
+    width: 100%;
+    font-weight: 500;
+    color: var(--base-600);
+    font-size: 14px;
+}
+
+.user-register-form-bottom {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.user-register-form-link {
+    text-decoration: none;
+    color: var(--base-600);
+}
+
+.user-register-form-link:hover {
+    text-decoration: underline;
+}
+
+.user-register-form-btn {
+    width: 95px;
+    padding: 7px 0px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary-content);
+    background-color: var(--primary);
+    border-radius: 0px;
+    border: none;
+}
+
+/* UserSettings 頁面的 CSS */
+.user-settings {
+    width: 950px;
+    margin: 0px auto;
+    border: 1px solid var(--base-300);
+    background-color: white;
+    box-sizing: border-box;
+    margin-top: 50px;
+}
+
+.user-settings-top {
+    padding: 20px;
+    border-bottom: 1px solid var(--base-300);
+}
+
+.user-settings-title {
+    margin: 0px;
+}
+
+.user-settings-table {
+    width: 100%;
+    padding: 20px;
+    font-weight: 300;
+    border-spacing: 0px 0px;
+}
+
+.user-settings-table td {
+    border: none;
+}
+
+.user-settings-table-field {
+    width: 300px;
+    text-align: right;
+    font-weight: 400;
+    padding: 3px 0px;
+    padding-right: 30px;
+}
+
+.user-settings-table-data {
+    padding: 3px 0px;
+}
+
+.user-settings-table-edit-btn {
+    text-align: right;
+    padding: none;
+    padding: 3px 0px;
+}
+
+.user-settings-table-edit-btn button {
+    padding: 5px 9px;
+    background-color: var(--base-600);
+    color: white;
+    border: none;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+/* 元件 CSS 這裡開始！ */
+/* Accordion 元件的 CSS */
+.accordion {
+    width: 100%;
+}
+
+.accordion-item {
+    border-top: 1px solid var(--base-300);
+}
+
+.accordion-header {
+    padding: 15px 20px;
+    background-color: white;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.accordion-header:hover {
+    background-color: var(--base-300);
+}
+
+.accordion-icon {
+    font-size: 18px;
+    transition: transform 0.2s ease;
+}
+
+.accordion-icon.open {
+    transform: rotate(180deg);
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    padding: 0 20px;
+}
+
+.accordion-content.active {
+    max-height: 500px;
+    padding: 20px;
+}
+
+/* Footer 元件的 CSS */
+.footer {
+    background-color: var(--base-600);
+    color: var(--base-300);
+    padding: 15px 0px;
+    display: flex;
+    justify-content: center;
+}
+
+.footer-text {
+    font-weight: 300;
+    margin: 0px;
+}
+
+/* Header 元件的 CSS */
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 50px;
+    background-color: var(--base-600);
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.header-logo-image {
+    height: 38px;
+}
+
+.header-logo-text {
+    font-weight: 400;
+    color: var(--base);
+    margin: 15px 0px;
+}
+
+.header-nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-nav-profile {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.header-nav-profile-image {
+    height: 35px;
+    width: 35px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.header-nav-profile-name {
+    line-height: 1rem;
+    margin: 0px;
+    color: var(--base);
+    font-weight: 500;
+}
+
+.header-nav-profile-greeting {
+    margin: 0px;
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--base-300)
+}
+
+.header-nav-profile-cart {
+    font-size: 24px;
+    color: var(--base-300);
+}
+
+.header-nav-link {
+    text-decoration: none;
+    font-weight: 300;
+    color: var(--base)
+}
+
+/* StoreFilters 元件的 CSS */
+.store-filters {
+    background-color: var(--base-600);
+}
+
+.store-filters-inner {
+    width: min(calc(100% - 100px), 950px);
+    margin: 0px auto;
+    padding: 10px 0px 20px;
+}
+
+.store-filters-title {
+    margin: 0px;
+    color: var(--base);
+    font-weight: 500;
+}
+
+.store-filters-bottom {
+    width: 100%;
+    display: flex;
+    gap: 80px;
+    align-items: center;
+}
+
+.store-filters-content {
+    min-width: 0;
+    display: flex;
+    gap: 15px;
+    padding: 10px 0px;
+    flex: 15;
+}
+
+.store-filters-content-select {
+    min-width: 0;
+    flex: 1;
+    border: 1px solid var(--base-300);
+    border-radius: 0px;
+    font-size: 14px;
+    padding: 4px;
+}
+
+.store-filters-btn {
+    padding: 2px 8px;
+    font-size: 16px;
+    font-weight: 300;
+    flex-shrink: 0;
+    flex: 1;
+}
+
+/* StoreItem 元件的 CSS */
+.store-item {
+    background-color: white;
+    border: 1px solid var(--base-300);
+    flex: 1;
+}
+
+.store-item-title {
+    font-weight: 600;
+    margin: 10px;
+}
+
+.store-item-image {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+}
+
+.store-item-description {
+    font-weight: 300;
+    margin: 10px;
+}
+
+.store-item-bottom {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 10px;
+    gap: 5px;
+}
+
+.store-item-bottom-price {
+    font-weight: 300;
+    margin: 0px;
+}
+
+.store-item-bottom-price-sign {
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.store-item-bottom-btn {
+    padding: 5px 6px;
+    font-size: 14px;
+    font-weight: 400;
+    border: none;
+    background-color: var(--primary);
+    color: var(--primary-content)
+}
+
+.store-item-bottom-btn-icon {
+    font-weight: 900;
+    stroke-width: 100;
 }

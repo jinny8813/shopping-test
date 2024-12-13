@@ -1,13 +1,58 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+* {
+  --base: #f9fafb;
+  --base-300: #d1d5db;
+  --base-600: #4b5563;
+  --base-content: #030712;
+  --primary: #f97316;
+  --primary-content: #fff7ed;
+
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  margin: 0px;
+  background-color: var(--base);
+  color: var(--base-content)
+}
+
+.base {
+  color: var(--base);
+}
+
+.bg-base {
+  background-color: var(--base);
+}
+
+.base-600 {
+  color: var(--base-600)
+}
+
+.bg-base-600 {
+  background-color: var(--base-600);
+}
+
+.base-content {
+  color: var(--base-content)
+}
+
+.bg-base-content {
+  background-color: var(--base-content);
+}
+
+.primary {
+  color: var(--primary)
+}
+
+.bg-primary {
+  background-color: var(--primary);
+}
+
+.primary-content {
+  color: var(--primary-content)
+}
+
+.bg-primary-content {
+  background-color: var(--primary-content);
 }
