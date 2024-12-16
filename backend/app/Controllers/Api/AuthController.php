@@ -175,6 +175,7 @@ class AuthController extends ResourceController
         $payload = [
             'm_id' => $member['m_id'],
             'm_email' => $member['m_email'],
+            'm_role' => $member['m_role'],
             'iat' => time(),
             'exp' => time() + $this->jwt->expire
         ];

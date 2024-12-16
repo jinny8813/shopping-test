@@ -2,56 +2,47 @@
 
 namespace App\Filters;
 
+use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
-use CodeIgniter\Filters\FilterInterface;
 
 class ApiAccessFilter implements FilterInterface
 {
-
-    protected $allowHeaders = [
-        "Access-Control-Allow-Headers",
-        "Origin,Accept",
-        // "X-Requested-With",
-        "Content-Type",
-        "Authorization",
-        // "Access-Control-Request-Method",
-        // "Access-Control-Request-Headers",
-        // "X-Access-Token",
-        // "X-Refresh-Token",
-        // "X-Edit-Verify-Token",
-        // "X-Edit-Sdk-Token",
-        // "X-User-Sdk-Token",
-        // "X-Activity-Page-Path",
-        // "X-Activity-Domain",
-        // "X-Activity-Page-Path",
-        // "X-Unique-Key",
-        // "X-Page-Domain",
-        // "X-Page-Path",
-        // "X-Page-Url"
-    ];
-
-    protected $allowMethods = [
-        'DELETE',
-        'PUT',
-        'POST',
-        'GET',
-        'PATCH',
-        'OPTIONS'
-    ];
-
     public function before(RequestInterface $request, $arguments = null)
     {
-        $response = \CodeIgniter\Config\Services::response();
-        $response->setHeader("Access-Control-Allow-Origin", "*");
-        $response->setHeader("Access-Control-Allow-Credentials", "true");
-        $response->setHeader("Access-Control-Allow-Headers", implode(", ", $this->allowHeaders));
-        if (strcasecmp($request->getMethod(), "options") == 0) {
-            $response->setHeader("Access-Control-Allow-Methods", implode(", ", $this->allowMethods));
+        $allowedOrigins = [
+            'https://your-frontend-domain.com',
+            'https://api.your-domain.com',
+            // 生產環境的網域
+        ];
+    
+        // 開發環境
+        if (ENVIRONMENT === 'development') {
+            $allowedOrigins = array_merge($allowedOrigins, [
+                'http://localhost:3000',
+                'http://127.0.0.1:3000',
+                'http://localhost:3001',
+                'http://127.0.0.1:3001',
+            ]);
+        }
+
+        $origin = $request->getHeaderLine('Origin');
+
+        if (in_array($origin, $allowedOrigins)) {
+            header('Access-Control-Allow-Origin: ' . $origin);
+        }
+
+        header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization');
+        header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS, PATCH');
+        header('Access-Control-Allow-Credentials: true');
+
+        if ($request->getMethod() === 'OPTIONS') {
+            die(); // 處理 preflight request
         }
     }
 
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
+        // Do nothing
     }
 }

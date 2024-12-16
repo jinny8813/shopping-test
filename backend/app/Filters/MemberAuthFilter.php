@@ -36,9 +36,8 @@ class MemberAuthFilter implements FilterInterface
                 $token,
                 new Key($this->jwt->key, $this->jwt->algorithm)
             );
-            
             // 檢查是否為一般會員
-            if ($decoded->role !== 'member') {
+            if ($decoded->m_role !== 'member') {
                 return $response->setStatusCode(403)
                     ->setJSON(['error' => '無權限訪問']);
             }

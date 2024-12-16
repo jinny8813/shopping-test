@@ -31,7 +31,7 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 //$routes->get('/', 'Home::index');
 
-// $routes->options('/(:any)', 'Home::options', ['filter' => 'ApiAccessFilter']);
+// $routes->options('/(:any)', 'Home::options', ['filter' => 'apiAccess']);
 
 // $routes->get('/', 'MembersController::index');
 // $routes->get('/register', 'MembersController::renderRegisterPage');
@@ -96,9 +96,10 @@ $routes->set404Override();
 // $routes->delete('/backstage/storeInfo/(:num)', 'BackStage\StoreInfoController::deleteStoreInfo/$1');
 // $routes->get('/backstage/storeInfo/(:num)', 'BackStage\StoreInfoController::showPerStoreInfo/$1');
 
+$routes->options('(:any)', 'Home::options', ['filter' => 'apiAccess']);
 
 // 前台 API 路由
-$routes->group('api', function($routes) {
+$routes->group('api', ['filter' => 'apiAccess'], function($routes) {
     // 公開路由
     $routes->post('register', 'Api\AuthController::register');
     $routes->post('login', 'Api\AuthController::login');
@@ -106,7 +107,7 @@ $routes->group('api', function($routes) {
     $routes->post('reset-password', 'Api\AuthController::resetPassword');
 
     // 需要會員驗證的路由
-    $routes->group('', ['filter' => 'auth'], function($routes) {
+    $routes->group('', ['filter' => 'memberAuth'], function($routes) {
         $routes->get('profile', 'Api\MemberController::profile');
         $routes->put('profile', 'Api\MemberController::update');
         $routes->post('change-password', 'Api\MemberController::changePassword');
@@ -115,7 +116,7 @@ $routes->group('api', function($routes) {
 });
 
 // 後台 API 路由
-$routes->group('admin', function($routes) {
+$routes->group('admin', ['filter' => 'apiAccess'], function($routes) {
     // 後台登入
     $routes->post('login', 'Admin\AuthController::login');
 
@@ -129,6 +130,9 @@ $routes->group('admin', function($routes) {
         $routes->get('members/(:num)', 'Admin\MemberController::show/$1');
         $routes->put('members/(:num)', 'Admin\MemberController::update/$1');
         $routes->delete('members/(:num)', 'Admin\MemberController::delete/$1');
+
+        // 會員管理 RESTful API
+        $routes->resource('members', ['controller' => 'Admin\MemberController']);
         
         // 其他後台功能...
     });

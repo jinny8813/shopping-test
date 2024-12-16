@@ -3,7 +3,11 @@
 namespace App\Controllers\Api;
 
 use CodeIgniter\RESTful\ResourceController;
+use App\Libraries\CustomRequest;
 
+/**
+ * @property CustomRequest $request
+ */
 class MemberController extends ResourceController
 {
     protected $memberModel;
@@ -17,6 +21,11 @@ class MemberController extends ResourceController
     public function profile()
     {
         $userData = $this->request->userData;
+        
+        if (!$userData) {
+            return $this->failUnauthorized('未登入');
+        }
+
         $member = $this->memberModel->find($userData->m_id);
 
         if (!$member) {
@@ -26,7 +35,6 @@ class MemberController extends ResourceController
         unset($member['m_password']);
         unset($member['reset_token']);
         unset($member['reset_token_expires']);
-        unset($member['verification_token']);
 
         return $this->respond([
             'status' => true,
@@ -34,16 +42,33 @@ class MemberController extends ResourceController
         ]);
     }
 
-    // 更新個人資料
-    public function update()
+    /**
+     * 更新會員資料
+     * @param int|null $id
+     * @return \CodeIgniter\HTTP\ResponseInterface
+     */
+    public function update($id = null)
     {
         $userData = $this->request->userData;
+        
+        if (!$userData) {
+            return $this->failUnauthorized('未登入');
+        }
+
+        // 確保只能更新自己的資料
+        if ($id !== null && $id != $userData->m_id) {
+            return $this->failForbidden('無權限修改他人資料');
+        }
+
         $data = $this->request->getJSON(true);
 
         $rules = [
             'm_name' => 'permit_empty|string|min_length[2]',
             'm_phone' => 'permit_empty|string|min_length[8]',
             'm_adress' => 'permit_empty|string',
+            'm_gmail' => 'permit_empty|valid_email',
+            'm_line' => 'permit_empty|string',
+            'm_fb' => 'permit_empty|string'
         ];
 
         if (!$this->validate($rules)) {
@@ -54,11 +79,15 @@ class MemberController extends ResourceController
             'm_name',
             'm_phone',
             'm_adress',
+            'm_gmail',
             'm_line',
             'm_fb'
         ];
 
-        $updateData = array_intersect_key($data, array_flip($allowedFields));
+        $updateData = array_intersect_key($data ?? [], array_flip($allowedFields));
+        $updateData = array_filter($updateData, function($value) {
+            return $value !== null;
+        });
 
         try {
             if (!empty($updateData)) {
@@ -81,7 +110,10 @@ class MemberController extends ResourceController
     public function changePassword()
     {
         $userData = $this->request->userData;
-        $data = $this->request->getJSON(true);
+        
+        if (!$userData) {
+            return $this->failUnauthorized('未登入');
+        }
 
         $rules = [
             'current_password' => 'required',
@@ -93,6 +125,7 @@ class MemberController extends ResourceController
             return $this->failValidationErrors($this->validator->getErrors());
         }
 
+        $data = $this->request->getJSON(true);
         $member = $this->memberModel->find($userData->m_id);
 
         if (!password_verify($data['current_password'], $member['m_password'])) {
@@ -117,7 +150,13 @@ class MemberController extends ResourceController
     public function deactivate()
     {
         $userData = $this->request->userData;
+        
+        if (!$userData) {
+            return $this->failUnauthorized('未登入');
+        }
+
         $data = $this->request->getJSON(true);
+        $member = $this->memberModel->find($userData->m_id);
 
         if (!password_verify($data['password'] ?? '', $member['m_password'])) {
             return $this->failValidationError('密碼錯誤');
