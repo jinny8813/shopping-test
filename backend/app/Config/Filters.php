@@ -26,6 +26,8 @@ class Filters extends BaseConfig
         'secureheaders' => SecureHeaders::class,
         'JwtAuth'       => \App\Filters\JwtAuth::class,
         'ApiAccessFilter'  => \App\Filters\ApiAccessFilter::class,
+        'adminAuth' => \App\Filters\AdminAuthFilter::class,
+        'memberAuth' => \App\Filters\MemberAuthFilter::class
     ];
 
     /**

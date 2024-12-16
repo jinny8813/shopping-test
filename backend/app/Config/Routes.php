@@ -31,70 +31,108 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 //$routes->get('/', 'Home::index');
 
-$routes->options('/(:any)', 'Home::options', ['filter' => 'ApiAccessFilter']);
+// $routes->options('/(:any)', 'Home::options', ['filter' => 'ApiAccessFilter']);
 
-$routes->get('/', 'MembersController::index');
-$routes->get('/register', 'MembersController::renderRegisterPage');
-$routes->post('/register', 'MembersController::register');
-$routes->get('/login', 'MembersController::renderLoginPage');
-$routes->post('/login', 'MembersController::login');
+// $routes->get('/', 'MembersController::index');
+// $routes->get('/register', 'MembersController::renderRegisterPage');
+// $routes->post('/register', 'MembersController::register');
+// $routes->get('/login', 'MembersController::renderLoginPage');
+// $routes->post('/login', 'MembersController::login');
 
-$routes->get('/product', 'FrontStage\ProductsController::showProducts');
-$routes->get('/product/(:num)', 'FrontStage\ProductsController::showPerProduct/$1');
+// $routes->get('/product', 'FrontStage\ProductsController::showProducts');
+// $routes->get('/product/(:num)', 'FrontStage\ProductsController::showPerProduct/$1');
 
-$routes->group('/', ['filter' => 'JwtAuth','ApiAccessFilter'], function($routes)
-{
-    $routes->get('/home', 'MemberManage::index');
-    $routes->get('/logout', 'MembersController::logout');
+// $routes->group('/', ['filter' => 'JwtAuth','ApiAccessFilter'], function($routes)
+// {
+//     $routes->get('/home', 'MemberManage::index');
+//     $routes->get('/logout', 'MembersController::logout');
 
-    $routes->get('/editMemberData', 'MemberManage::renderEditMemberDataPage');
-    $routes->post('/editMemberData', 'MemberManage::update');
-    $routes->delete('/delete', 'MemberManage::delete');
+//     $routes->get('/editMemberData', 'MemberManage::renderEditMemberDataPage');
+//     $routes->post('/editMemberData', 'MemberManage::update');
+//     $routes->delete('/delete', 'MemberManage::delete');
 
-    // $routes->get('/backstage/product', 'BackStage\ProductsController::showProducts');
-    // $routes->post('/backstage/product', 'BackStage\ProductsController::addProduct');
-    // $routes->put('/backstage/product/(:num)', 'BackStage\ProductsController::editProduct/$1');
-    // $routes->delete('/backstage/product/(:num)', 'BackStage\ProductsController::deleteProduct/$1');
-    // $routes->get('/backstage/product/(:num)', 'BackStage\ProductsController::showPerProduct/$1');
+//     // $routes->get('/backstage/product', 'BackStage\ProductsController::showProducts');
+//     // $routes->post('/backstage/product', 'BackStage\ProductsController::addProduct');
+//     // $routes->put('/backstage/product/(:num)', 'BackStage\ProductsController::editProduct/$1');
+//     // $routes->delete('/backstage/product/(:num)', 'BackStage\ProductsController::deleteProduct/$1');
+//     // $routes->get('/backstage/product/(:num)', 'BackStage\ProductsController::showPerProduct/$1');
 
-    $routes->get('/cartItems', 'FrontStage\CartItemsController::showCartItems');
-    $routes->post('/cartItems', 'FrontStage\CartItemsController::addCartItem');
-    $routes->put('/cartItems/(:num)', 'FrontStage\CartItemsController::editCartItem/$1');
-    $routes->delete('/cartItems/(:num)', 'FrontStage\CartItemsController::deleteCartItem/$1');
+//     $routes->get('/cartItems', 'FrontStage\CartItemsController::showCartItems');
+//     $routes->post('/cartItems', 'FrontStage\CartItemsController::addCartItem');
+//     $routes->put('/cartItems/(:num)', 'FrontStage\CartItemsController::editCartItem/$1');
+//     $routes->delete('/cartItems/(:num)', 'FrontStage\CartItemsController::deleteCartItem/$1');
 
     
+// });
+
+// $routes->get('/orders', 'FrontStage\OrdersController::testCreateOrder');
+
+// $routes->post('/orders', 'FrontStage\OrdersController::createOrder');
+// $routes->get('/orderPay', 'FrontStage\EcPayController::orderPay');
+// $routes->post('/callbackAfterPayment', 'FrontStage\EcPayController::callbackAfterPayment');
+// $routes->post('/afterPayment', 'FrontStage\EcPayController::afterPayment');
+
+// $routes->get('/backstage/categories', 'BackStage\CategoriesController::showCategories');
+// $routes->post('/backstage/categories', 'BackStage\CategoriesController::addCategory');
+// $routes->put('/backstage/categories/(:num)', 'BackStage\CategoriesController::editCategory/$1');
+// $routes->delete('/backstage/categories/(:num)', 'BackStage\CategoriesController::deleteCategory/$1');
+
+// $routes->get('/backstage/product', 'BackStage\ProductsController::showProducts');
+// $routes->post('/backstage/product', 'BackStage\ProductsController::addProduct');
+// $routes->put('/backstage/product/(:num)', 'BackStage\ProductsController::editProduct/$1');
+// $routes->delete('/backstage/product/(:num)', 'BackStage\ProductsController::deleteProduct/$1');
+// $routes->get('/backstage/product/(:num)', 'BackStage\ProductsController::showPerProduct/$1');
+
+// $routes->get('/backstage/order', 'BackStage\OrdersController::showOrders');
+// $routes->put('/backstage/order/(:num)', 'BackStage\OrdersController::editOrder/$1');
+// $routes->delete('/backstage/order/(:num)', 'BackStage\OrdersController::deleteOrder/$1');
+// $routes->get('/backstage/order/(:num)', 'BackStage\OrdersController::showPerOrder/$1');
+
+// $routes->get('/order', 'FrontStage\OrdersController::showOrders');
+// $routes->put('order/(:num)', 'FrontStage\OrdersController::editOrder/$1');
+
+// $routes->post('/backstage/storeInfo', 'BackStage\StoreInfoController::addStoreInfo');
+// $routes->put('/backstage/storeInfo/(:num)', 'BackStage\StoreInfoController::editStoreInfo/$1');
+// $routes->delete('/backstage/storeInfo/(:num)', 'BackStage\StoreInfoController::deleteStoreInfo/$1');
+// $routes->get('/backstage/storeInfo/(:num)', 'BackStage\StoreInfoController::showPerStoreInfo/$1');
+
+
+// 前台 API 路由
+$routes->group('api', function($routes) {
+    // 公開路由
+    $routes->post('register', 'Api\AuthController::register');
+    $routes->post('login', 'Api\AuthController::login');
+    $routes->post('forgot-password', 'Api\AuthController::forgotPassword');
+    $routes->post('reset-password', 'Api\AuthController::resetPassword');
+
+    // 需要會員驗證的路由
+    $routes->group('', ['filter' => 'auth'], function($routes) {
+        $routes->get('profile', 'Api\MemberController::profile');
+        $routes->put('profile', 'Api\MemberController::update');
+        $routes->post('change-password', 'Api\MemberController::changePassword');
+        $routes->delete('deactivate', 'Api\MemberController::deactivate');
+    });
 });
 
-$routes->get('/orders', 'FrontStage\OrdersController::testCreateOrder');
+// 後台 API 路由
+$routes->group('admin', function($routes) {
+    // 後台登入
+    $routes->post('login', 'Admin\AuthController::login');
 
-$routes->post('/orders', 'FrontStage\OrdersController::createOrder');
-$routes->get('/orderPay', 'FrontStage\EcPayController::orderPay');
-$routes->post('/callbackAfterPayment', 'FrontStage\EcPayController::callbackAfterPayment');
-$routes->post('/afterPayment', 'FrontStage\EcPayController::afterPayment');
-
-$routes->get('/backstage/categories', 'BackStage\CategoriesController::showCategories');
-$routes->post('/backstage/categories', 'BackStage\CategoriesController::addCategory');
-$routes->put('/backstage/categories/(:num)', 'BackStage\CategoriesController::editCategory/$1');
-$routes->delete('/backstage/categories/(:num)', 'BackStage\CategoriesController::deleteCategory/$1');
-
-$routes->get('/backstage/product', 'BackStage\ProductsController::showProducts');
-$routes->post('/backstage/product', 'BackStage\ProductsController::addProduct');
-$routes->put('/backstage/product/(:num)', 'BackStage\ProductsController::editProduct/$1');
-$routes->delete('/backstage/product/(:num)', 'BackStage\ProductsController::deleteProduct/$1');
-$routes->get('/backstage/product/(:num)', 'BackStage\ProductsController::showPerProduct/$1');
-
-$routes->get('/backstage/order', 'BackStage\OrdersController::showOrders');
-$routes->put('/backstage/order/(:num)', 'BackStage\OrdersController::editOrder/$1');
-$routes->delete('/backstage/order/(:num)', 'BackStage\OrdersController::deleteOrder/$1');
-$routes->get('/backstage/order/(:num)', 'BackStage\OrdersController::showPerOrder/$1');
-
-$routes->get('/order', 'FrontStage\OrdersController::showOrders');
-$routes->put('order/(:num)', 'FrontStage\OrdersController::editOrder/$1');
-
-$routes->post('/backstage/storeInfo', 'BackStage\StoreInfoController::addStoreInfo');
-$routes->put('/backstage/storeInfo/(:num)', 'BackStage\StoreInfoController::editStoreInfo/$1');
-$routes->delete('/backstage/storeInfo/(:num)', 'BackStage\StoreInfoController::deleteStoreInfo/$1');
-$routes->get('/backstage/storeInfo/(:num)', 'BackStage\StoreInfoController::showPerStoreInfo/$1');
+    // 需要管理員驗證的路由
+    $routes->group('', ['filter' => 'adminAuth'], function($routes) {
+        // 儀表板
+        $routes->get('dashboard', 'Admin\DashboardController::index');
+        
+        // 會員管理
+        $routes->get('members', 'Admin\MemberController::index');
+        $routes->get('members/(:num)', 'Admin\MemberController::show/$1');
+        $routes->put('members/(:num)', 'Admin\MemberController::update/$1');
+        $routes->delete('members/(:num)', 'Admin\MemberController::delete/$1');
+        
+        // 其他後台功能...
+    });
+});
 /*
  * --------------------------------------------------------------------
  * Additional Routing

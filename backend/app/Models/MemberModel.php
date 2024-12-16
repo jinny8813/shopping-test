@@ -4,16 +4,17 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class MembersModel extends Model
+class MemberModel extends Model
 {
-    protected $table            = 'Members';
+    protected $table            = 'member';
     protected $primaryKey       = 'm_id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'm_id', 'm_password', 'm_email', 'm_gmail', 'm_line', 'm_fb', 'm_name', 'm_phone', 'm_address'
+       'm_email', 'm_password', 'm_gmail', 'm_line', 'm_fb',
+       'm_name', 'm_phone', 'm_adress', 'm_role','last_login','reset_token','reset_token_expires'
     ];
 
     // Dates
@@ -24,7 +25,10 @@ class MembersModel extends Model
     protected $deletedField  = 'deleted_at';
 
     // Validation
-    protected $validationRules      = [];
+    protected $validationRules = [
+        'm_email' => 'required|valid_email|is_unique[member.m_email,m_id,{m_id}]',
+        'm_password' => 'required|min_length[6]',
+    ];
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
