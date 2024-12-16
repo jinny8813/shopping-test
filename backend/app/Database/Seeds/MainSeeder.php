@@ -9,6 +9,7 @@ class MainSeeder extends Seeder
     public function run()
     {
         // 按照需要的順序調用所有 seeder
+        $this->call('AdminSeeder');
         $this->call('MemberSeeder');
         $this->call('CartItems');
         $this->call('Products');

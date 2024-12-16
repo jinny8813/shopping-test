@@ -43,4 +43,15 @@ class MemberModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+
+    // 檢查是否為超級管理員
+    public function isSuperAdmin($adminId)
+    {
+        $admin = $this->select('member.*, roles.name as role_name')
+                        ->join('roles', 'roles.m_role = member.m_role')
+                        ->find($adminId);
+        
+        return $admin && $admin['role_name'] === 'super_admin';
+    }
 }

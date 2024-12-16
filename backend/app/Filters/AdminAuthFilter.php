@@ -38,12 +38,12 @@ class AdminAuthFilter implements FilterInterface
             );
 
             // 檢查是否為管理員
-            if ($decoded->m_role !== 'admin') {
+            if ($decoded->role !== 'admin' && $decoded->role !== 'super_admin') {
                 return $response->setStatusCode(403)
                     ->setJSON(['error' => '無權限訪問後台']);
             }
 
-            $request->userData = $decoded;
+            $request->adminData = $decoded;
             return $request;
         } catch (\Exception $e) {
             return $response->setStatusCode(401)

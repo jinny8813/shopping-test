@@ -110,7 +110,7 @@ $routes->group('api', ['filter' => 'apiAccess'], function($routes) {
     $routes->group('', ['filter' => 'memberAuth'], function($routes) {
         $routes->get('profile', 'Api\MemberController::profile');
         $routes->put('profile', 'Api\MemberController::update');
-        $routes->post('change-password', 'Api\MemberController::changePassword');
+        $routes->put('change-password', 'Api\MemberController::changePassword');
         $routes->delete('deactivate', 'Api\MemberController::deactivate');
         $routes->get('logout', 'Api\MemberController::logout');
     });
@@ -125,15 +125,28 @@ $routes->group('admin', ['filter' => 'apiAccess'], function($routes) {
     $routes->group('', ['filter' => 'adminAuth'], function($routes) {
         // 儀表板
         $routes->get('dashboard', 'Admin\DashboardController::index');
+
+        // 管理員自己
+        $routes->get('profile', 'Admin\AuthController::profile');
+        $routes->put('profile', 'Admin\AuthController::update');
+        $routes->put('change-password', 'Admin\AuthController::changePassword');
+        $routes->get('logout', 'Admin\AuthController::logout');
+
+        // 超級管理員
+        $routes->get('admins', 'Admin\AdminController::index');
+        $routes->post('admins', 'Admin\AdminController::create');
+        $routes->get('admins/(:num)', 'Admin\AdminController::show/$1');
+        $routes->put('admins/(:num)', 'Admin\AdminController::update/$1');
+        $routes->delete('admins/(:num)', 'Admin\AdminController::delete/$1');
+        $routes->get('admins/logs', 'Admin\AdminController::logs');
         
         // 會員管理
         $routes->get('members', 'Admin\MemberController::index');
         $routes->get('members/(:num)', 'Admin\MemberController::show/$1');
         $routes->put('members/(:num)', 'Admin\MemberController::update/$1');
         $routes->delete('members/(:num)', 'Admin\MemberController::delete/$1');
-
-        // 會員管理 RESTful API
-        $routes->resource('members', ['controller' => 'Admin\MemberController']);
+        // $routes->get('members/statistics', 'Admin\MemberController::statistics');
+        // $routes->get('members/export', 'Admin\MemberController::export');
         
         // 其他後台功能...
     });
