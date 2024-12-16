@@ -112,6 +112,7 @@ $routes->group('api', ['filter' => 'apiAccess'], function($routes) {
         $routes->put('profile', 'Api\MemberController::update');
         $routes->post('change-password', 'Api\MemberController::changePassword');
         $routes->delete('deactivate', 'Api\MemberController::deactivate');
+        $routes->get('logout', 'Api\MemberController::logout');
     });
 });
 

@@ -174,4 +174,23 @@ class MemberController extends ResourceController
             return $this->failServerError('註銷失敗');
         }
     }
+
+    public function logout()
+    {
+        try {
+            $userData = $this->request->userData;
+            
+            // 更新最後登出時間
+            $this->memberModel->update($userData->m_id, [
+                'last_login' => date('Y-m-d H:i:s')
+            ]);
+
+            return $this->respond([
+                'status' => true,
+                'message' => '登出成功'
+            ]);
+        } catch (\Exception $e) {
+            return $this->failServerError('登出失敗');
+        }
+    }
 }
