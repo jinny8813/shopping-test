@@ -40,7 +40,7 @@ class Filters extends BaseConfig
         'before' => [
             'apiAccess',
             // 'honeypot',
-            // 'csrf',
+            'csrf' => ['except' => ['api/*', 'admin/login']],
             // 'invalidchars',
         ],
         'after' => [

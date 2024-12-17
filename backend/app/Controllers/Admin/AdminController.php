@@ -12,11 +12,13 @@ class AdminController extends ResourceController
 {
     protected $adminModel;
     protected $adminLogModel;
+    protected $session;
 
     public function __construct()
     {
         $this->adminModel = new \App\Models\AdminModel();
         $this->adminLogModel = new \App\Models\AdminLogModel();
+        $this->session = session();
     }
 
     // 獲取管理員列表
@@ -34,7 +36,8 @@ class AdminController extends ResourceController
 
         return $this->respond([
             'status' => true,
-            'data' => $admins
+            'data' => $admins,
+            'csrf_token' => $this->session->get('csrf_token')
         ]);
     }
 
@@ -75,7 +78,8 @@ class AdminController extends ResourceController
     
         return $this->respondCreated([
             'status' => true,
-            'message' => '管理員新增成功'
+            'message' => '管理員新增成功',
+            'csrf_token' => $this->session->get('csrf_token')
         ]);
     }
 
@@ -141,7 +145,8 @@ class AdminController extends ResourceController
         
                 return $this->respond([
                     'status' => true,
-                    'message' => '更新成功'
+                    'message' => '更新成功',
+                    'csrf_token' => $this->session->get('csrf_token')
                 ]);
             }
             return $this->respond([
@@ -183,7 +188,8 @@ class AdminController extends ResourceController
 
         return $this->respondDeleted([
             'status' => true,
-            'message' => '刪除成功'
+            'message' => '刪除成功',
+            'csrf_token' => $this->session->get('csrf_token')
         ]);
     }
 
@@ -201,7 +207,8 @@ class AdminController extends ResourceController
             'pager' => [
                 'current_page' => $page,
                 'total_pages' => ceil($this->adminLogModel->countAllResults() / $limit)
-            ]
+            ],
+            'csrf_token' => $this->session->get('csrf_token')
         ]);
     }
 }

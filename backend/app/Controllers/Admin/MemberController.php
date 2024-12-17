@@ -12,11 +12,13 @@ class MemberController extends ResourceController
 {
     protected $memberModel;
     protected $adminLogModel;
+    protected $session;
 
     public function __construct()
     {
         $this->memberModel = new \App\Models\MemberModel();
         $this->adminLogModel = new \App\Models\AdminLogModel();
+        $this->session = session();
     }
 
     // 獲取會員列表
@@ -39,7 +41,8 @@ class MemberController extends ResourceController
 
         return $this->respond([
             'status' => true,
-            'data' => $members
+            'data' => $members,
+            'csrf_token' => $this->session->get('csrf_token')
         ]);
     }
 
@@ -77,7 +80,8 @@ class MemberController extends ResourceController
 
         return $this->respond([
             'status' => true,
-            'data' => $member
+            'data' => $member,
+            'csrf_token' => $this->session->get('csrf_token')
         ]);
     }
 
@@ -118,7 +122,8 @@ class MemberController extends ResourceController
 
             return $this->respond([
                 'status' => true,
-                'message' => '會員資料更新成功'
+                'message' => '會員資料更新成功',
+                'csrf_token' => $this->session->get('csrf_token')
             ]);
         } catch (\Exception $e) {
             return $this->failServerError('更新失敗');
@@ -147,7 +152,8 @@ class MemberController extends ResourceController
 
             return $this->respondDeleted([
                 'status' => true,
-                'message' => '會員刪除成功'
+                'message' => '會員刪除成功',
+                'csrf_token' => $this->session->get('csrf_token')
             ]);
         } catch (\Exception $e) {
             return $this->failServerError('刪除失敗');
@@ -169,7 +175,8 @@ class MemberController extends ResourceController
 
         return $this->respond([
             'status' => true,
-            'data' => $stats
+            'data' => $stats,
+            'csrf_token' => $this->session->get('csrf_token')
         ]);
     }
 

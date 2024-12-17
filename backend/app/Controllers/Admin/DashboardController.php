@@ -14,6 +14,7 @@ class DashboardController extends ResourceController
     // protected $adminModel;
     // protected $adminLogModel;
     // protected $orderModel; // 如果有訂單功能的話
+    protected $session;
     
     public function __construct()
     {
@@ -21,6 +22,7 @@ class DashboardController extends ResourceController
         // $this->adminModel = new \App\Models\AdminModel();
         // $this->adminLogModel = new \App\Models\AdminLogModel();
         // $this->orderModel = new \App\Models\OrderModel();
+        $this->session = session();
     }
 
     public function index()
@@ -102,7 +104,8 @@ class DashboardController extends ResourceController
                 // 'online_admins' => $onlineAdmins,
                 // // 'order_stats' => $orderStats,
                 // 'system_status' => $systemStatus,
-            ]
+            ],
+            'csrf_token' => $this->session->get('csrf_token')
         ]);
     }
 
