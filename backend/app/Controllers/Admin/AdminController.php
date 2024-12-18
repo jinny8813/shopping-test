@@ -2,13 +2,13 @@
 
 namespace App\Controllers\Admin;
 
-use CodeIgniter\RESTful\ResourceController;
 use App\Libraries\CustomRequest;
+use App\Controllers\Admin\BaseAdminController;
 
 /**
  * @property CustomRequest $request
  */
-class AdminController extends ResourceController
+class AdminController extends BaseAdminController
 {
     protected $adminModel;
     protected $adminLogModel;
@@ -34,11 +34,7 @@ class AdminController extends ResourceController
         $admins = $this->adminModel->select('admin_id, username, name, email, role, status, last_login, created_at')
                                  ->findAll();
 
-        return $this->respond([
-            'status' => true,
-            'data' => $admins,
-            'csrf_token' => $this->session->get('csrf_token')
-        ]);
+        return $this->successResponse(['admins' => $admins]);
     }
 
     // 新增管理員
@@ -76,11 +72,11 @@ class AdminController extends ResourceController
             "創建新管理員: {$data['username']}"
         );
     
-        return $this->respondCreated([
-            'status' => true,
-            'message' => '管理員新增成功',
-            'csrf_token' => $this->session->get('csrf_token')
-        ]);
+        return $this->successResponse(
+            ['admin' => $data],
+            '管理員新增成功',
+            200
+        );
     }
 
     // 獲取管理員詳情
@@ -92,10 +88,11 @@ class AdminController extends ResourceController
             return $this->failNotFound('管理員不存在');
         }
 
-        return $this->respond([
-            'status' => true,
-            'data' => $admin
-        ]);
+        return $this->successResponse(
+            ['admin' => $admin],
+            '管理員詳情獲取成功',
+            200
+        );
     }
 
     // 更新管理員資料
@@ -136,23 +133,23 @@ class AdminController extends ResourceController
 
         try {
             if (!empty($updateData)) {
-                $this->adminModel->update($id, $data);
+                $this->adminModel->update($id, $updateData);
                 $this->adminLogModel->logActivity(
                     $adminData->admin_id,
                     'update_admin',
                     "更新管理員資料: ID {$id}"
                 );
         
-                return $this->respond([
-                    'status' => true,
-                    'message' => '更新成功',
-                    'csrf_token' => $this->session->get('csrf_token')
-                ]);
+                return $this->successResponse(
+                    ['admin' => $updateData],
+                    '管理員資料更新成功',
+                    200
+                );
             }
-            return $this->respond([
-                'status' => false,
-                'message' => '沒有要更新的資料'
-            ]);
+            return $this->failResponse(
+                '沒有要更新的資料',
+                400
+            );
         } catch (\Exception $e) {
             return $this->failServerError('更新失敗');
         }
@@ -186,11 +183,11 @@ class AdminController extends ResourceController
             "刪除管理員: ID {$id}"
         );
 
-        return $this->respondDeleted([
-            'status' => true,
-            'message' => '刪除成功',
-            'csrf_token' => $this->session->get('csrf_token')
-        ]);
+        return $this->successResponse(
+            ['message' => '刪除成功'],
+            '刪除成功',
+            200
+        );
     }
 
     // 獲取操作日誌
@@ -201,14 +198,10 @@ class AdminController extends ResourceController
 
         $logs = $this->adminLogModel->getAllLogs($page, $limit);
 
-        return $this->respond([
-            'status' => true,
-            'data' => $logs,
-            'pager' => [
-                'current_page' => $page,
-                'total_pages' => ceil($this->adminLogModel->countAllResults() / $limit)
-            ],
-            'csrf_token' => $this->session->get('csrf_token')
-        ]);
+        return $this->successResponse(
+            ['logs' => $logs],
+            '操作日誌獲取成功',
+            200
+        );
     }
 }

@@ -3,10 +3,9 @@
 
 namespace App\Controllers\Admin;
 
-use CodeIgniter\RESTful\ResourceController;
-use CodeIgniter\Files\File;
+use App\Controllers\Admin\BaseAdminController;
 
-class SettingController extends ResourceController
+class SettingController extends BaseAdminController
 {
     protected $settingModel;
     protected $mediaModel;
@@ -29,7 +28,7 @@ class SettingController extends ResourceController
         $file = $this->request->getFile('upload');
         
         if (!$file->isValid() || $file->hasMoved()) {
-            return $this->fail('無效的檔案');
+            return $this->failValidation('無效的檔案');
         }
 
         try {
@@ -58,12 +57,15 @@ class SettingController extends ResourceController
             $mediaId = $this->mediaModel->insert($mediaData);
 
             // 回傳給 CKEditor
-            return $this->respond([
-                'uploaded' => true,
-                'url' => base_url($containerPath),
-                'mediaId' => $mediaId,
-                'csrf_token' => $this->session->get('csrf_token')
-            ]);
+            return $this->successResponse(
+                [
+                    'uploaded' => true,
+                    'url' => base_url($containerPath),
+                    'mediaId' => $mediaId
+                ],
+                '檔案上傳成功',
+                200
+            );
 
         } catch (\Exception $e) {
             log_message('error', '[File Upload] Error: ' . $e->getMessage());
@@ -72,9 +74,10 @@ class SettingController extends ResourceController
     }
 
     // 儲存設定內容
-    public function create($type = null)
+    public function create()
     {
         $rules = [
+            'type' => 'required',
             'title' => 'required|min_length[2]',
             'content' => 'required'
         ];
@@ -108,14 +111,11 @@ class SettingController extends ResourceController
             // 取得完整資料
             $setting = $this->settingModel->find($settingId);
             
-            return $this->respondCreated([
-                'status' => true,
-                'message' => '新增成功',
-                'data' => [
-                    'setting' => $setting
-                ],
-                'csrf_token' => $this->session->get('csrf_token')
-            ]);
+            return $this->successResponse(
+                ['setting' => $setting],
+                '新增成功',
+                200
+            );
 
         } catch (\Exception $e) {
             $this->db->transRollback();

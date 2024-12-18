@@ -2,13 +2,13 @@
 
 namespace App\Controllers\Admin;
 
-use CodeIgniter\RESTful\ResourceController;
+use App\Controllers\Admin\BaseAdminController;
 use App\Libraries\CustomRequest;
 
 /**
  * @property CustomRequest $request
  */
-class DashboardController extends ResourceController
+class DashboardController extends BaseAdminController
 {
     // protected $memberModel;
     // protected $adminModel;
@@ -94,9 +94,8 @@ class DashboardController extends ResourceController
         //     'disk_free_space' => $this->formatBytes(disk_free_space("/")),
         // ];
 
-        return $this->respond([
-            'status' => true,
-            'data' => [
+        return $this->successResponse(
+            [
                 'dashboard' => 'viewing dashboard',
                 // 'overview' => $overview,
                 // 'member_stats' => $memberStats,
@@ -105,8 +104,9 @@ class DashboardController extends ResourceController
                 // // 'order_stats' => $orderStats,
                 // 'system_status' => $systemStatus,
             ],
-            'csrf_token' => $this->session->get('csrf_token')
-        ]);
+            'viewing dashboard',
+            200
+        );
     }
 
     // // 獲取會員註冊趨勢（最近30天）

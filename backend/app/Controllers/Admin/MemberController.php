@@ -2,13 +2,13 @@
 
 namespace App\Controllers\Admin;
 
-use CodeIgniter\RESTful\ResourceController;
+use App\Controllers\Admin\BaseAdminController;
 use App\Libraries\CustomRequest;
 
 /**
  * @property CustomRequest $request
  */
-class MemberController extends ResourceController
+class MemberController extends BaseAdminController
 {
     protected $memberModel;
     protected $adminLogModel;
@@ -30,7 +30,6 @@ class MemberController extends ResourceController
         $members = $this->memberModel->select('m_id, m_email, m_name, m_phone, m_adress, last_login, created_at')
                                     ->findAll();
 
-        // 記錄操作日誌
         $adminData = $this->request->adminData;
         $this->adminLogModel->insert([
             'admin_id' => $adminData->admin_id,
@@ -39,11 +38,11 @@ class MemberController extends ResourceController
             'ip_address' => $this->request->getIPAddress()
         ]);
 
-        return $this->respond([
-            'status' => true,
-            'data' => $members,
-            'csrf_token' => $this->session->get('csrf_token')
-        ]);
+        return $this->successResponse(
+            ['members' => $members],
+            '會員列表',
+            200
+        );
     }
 
     // 獲取會員詳情
@@ -69,7 +68,6 @@ class MemberController extends ResourceController
 
         // $member['order_stats'] = $orderStats;
 
-        // 記錄操作日誌
         $adminData = $this->request->adminData;
         $this->adminLogModel->insert([
             'admin_id' => $adminData->admin_id,
@@ -78,11 +76,11 @@ class MemberController extends ResourceController
             'ip_address' => $this->request->getIPAddress()
         ]);
 
-        return $this->respond([
-            'status' => true,
-            'data' => $member,
-            'csrf_token' => $this->session->get('csrf_token')
-        ]);
+        return $this->successResponse(
+            ['member' => $member],
+            '會員詳情',
+            200
+        );
     }
 
     // 更新會員資料
@@ -111,7 +109,6 @@ class MemberController extends ResourceController
         try {
             $this->memberModel->update($id, $updateData);
 
-            // 記錄操作日誌
             $adminData = $this->request->adminData;
             $this->adminLogModel->insert([
                 'admin_id' => $adminData->admin_id,
@@ -120,11 +117,11 @@ class MemberController extends ResourceController
                 'ip_address' => $this->request->getIPAddress()
             ]);
 
-            return $this->respond([
-                'status' => true,
-                'message' => '會員資料更新成功',
-                'csrf_token' => $this->session->get('csrf_token')
-            ]);
+            return $this->successResponse(
+                ['message' => '會員資料更新成功'],
+                '會員資料更新成功',
+                200
+            );
         } catch (\Exception $e) {
             return $this->failServerError('更新失敗');
         }
@@ -138,10 +135,8 @@ class MemberController extends ResourceController
         }
 
         try {
-            // 執行軟刪除
             $this->memberModel->delete($id);
 
-            // 記錄操作日誌
             $adminData = $this->request->adminData;
             $this->adminLogModel->insert([
                 'admin_id' => $adminData->admin_id,
@@ -150,11 +145,11 @@ class MemberController extends ResourceController
                 'ip_address' => $this->request->getIPAddress()
             ]);
 
-            return $this->respondDeleted([
-                'status' => true,
-                'message' => '會員刪除成功',
-                'csrf_token' => $this->session->get('csrf_token')
-            ]);
+            return $this->successResponse(
+                ['message' => '會員刪除成功'],
+                '會員刪除成功',
+                200
+            );
         } catch (\Exception $e) {
             return $this->failServerError('刪除失敗');
         }
@@ -173,11 +168,11 @@ class MemberController extends ResourceController
                 ->countAllResults(),
         ];
 
-        return $this->respond([
-            'status' => true,
-            'data' => $stats,
-            'csrf_token' => $this->session->get('csrf_token')
-        ]);
+        return $this->successResponse(
+            ['stats' => $stats],
+            '會員統計資料',
+            200
+        );
     }
 
     // 匯出會員資料
