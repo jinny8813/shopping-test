@@ -46,6 +46,18 @@ services:
       - DB_PASSWORD=devpass
       - DB_NAME=shopping
 
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+      - ./public/uploads:/var/www/html/public/uploads
+    depends_on:
+      - db
+
   db:
     image: mysql:8.0
     ports:

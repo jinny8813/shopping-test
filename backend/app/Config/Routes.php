@@ -150,14 +150,15 @@ $routes->group('admin', ['filter' => 'apiAccess'], function($routes) {
         // $routes->get('members/export', 'Admin\MemberController::export');
 
         $routes->group('settings', function($routes) {
-            $routes->get('/', 'Admin\SettingController::index');
-            $routes->get('(:segment)', 'Admin\SettingController::show/$1');
-            $routes->post('(:segment)', 'Admin\SettingController::create/$1');
-            $routes->put('(:segment)/(:num)', 'Admin\SettingController::update/$1/$2');
-            $routes->delete('(:segment)/(:num)', 'Admin\SettingController::delete/$1/$2');
-            
             $routes->post('upload', 'Admin\SettingController::upload');
-            $routes->delete('media/(:num)', 'Admin\SettingController::deleteMedia/$1');
+
+            // $routes->get('/', 'Admin\SettingController::index');
+            // $routes->get('(:segment)', 'Admin\SettingController::show/$1');
+            $routes->post('/', 'Admin\SettingController::create');
+            // $routes->put('(:segment)/(:num)', 'Admin\SettingController::update/$1/$2');
+            // $routes->delete('(:segment)/(:num)', 'Admin\SettingController::delete/$1/$2');
+            
+            // $routes->delete('media/(:num)', 'Admin\SettingController::deleteMedia/$1');
         });
         
         // 其他後台功能...
