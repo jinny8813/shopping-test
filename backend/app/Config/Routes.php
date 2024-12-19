@@ -164,6 +164,69 @@ $routes->group('admin', ['filter' => 'apiAccess'], function($routes) {
         // 其他後台功能...
     });
 });
+
+
+// 新版 API 路由
+$routes->options('(:any)', 'Home::options', ['filter' => 'apiAccess']);
+
+// API V1 (前台)
+$routes->group('api/v1', ['filter' => 'apiAccess'], function($routes) {
+    // 公開路由
+    $routes->post('register', 'Api\V1\AuthController::register');
+    $routes->post('login', 'Api\V1\AuthController::login');
+    $routes->post('forgot-password', 'Api\V1\AuthController::forgotPassword');
+    $routes->post('reset-password', 'Api\V1\AuthController::resetPassword');
+
+    // 需要會員驗證的路由
+    $routes->group('', ['filter' => 'memberAuth'], function($routes) {
+        $routes->get('profile', 'Api\V1\MemberController::profile');
+        $routes->put('profile', 'Api\V1\MemberController::update');
+        $routes->put('change-password', 'Api\V1\MemberController::changePassword');
+        $routes->delete('deactivate', 'Api\V1\MemberController::deactivate');
+        $routes->get('logout', 'Api\V1\MemberController::logout');
+    });
+});
+
+// API Admin (後台)
+$routes->group('api/admin', ['filter' => 'apiAccess'], function($routes) {
+    // 後台登入
+    $routes->get('login', 'Api\Admin\AuthController::getCsrf');
+    $routes->post('login', 'Api\Admin\AuthController::login');
+
+    // 需要管理員驗證的路由
+    $routes->group('', ['filter' => 'adminAuth'], function($routes) {
+        // 儀表板
+        $routes->get('dashboard', 'Api\Admin\DashboardController::index');
+
+        // 管理員自己
+        $routes->get('profile', 'Api\Admin\AuthController::profile');
+        $routes->put('profile', 'Api\Admin\AuthController::update');
+        $routes->put('change-password', 'Api\Admin\AuthController::changePassword');
+        $routes->get('logout', 'Api\Admin\AuthController::logout');
+
+        // 超級管理員
+        $routes->get('admins', 'Api\Admin\AdminController::index');
+        $routes->post('admins', 'Api\Admin\AdminController::create');
+        $routes->get('admins/(:num)', 'Api\Admin\AdminController::show/$1');
+        $routes->put('admins/(:num)', 'Api\Admin\AdminController::update/$1');
+        $routes->delete('admins/(:num)', 'Api\Admin\AdminController::delete/$1');
+        $routes->get('admins/logs', 'Api\Admin\AdminController::logs');
+        
+        // 會員管理
+        $routes->get('members', 'Api\Admin\MemberController::index');
+        $routes->get('members/(:num)', 'Api\Admin\MemberController::show/$1');
+        $routes->put('members/(:num)', 'Api\Admin\MemberController::update/$1');
+        $routes->delete('members/(:num)', 'Api\Admin\MemberController::delete/$1');
+
+        // 設定管理
+        $routes->group('settings', function($routes) {
+            $routes->post('upload', 'Api\Admin\SettingController::upload');
+            $routes->get('/', 'Api\Admin\SettingController::index');
+            $routes->get('(:num)', 'Api\Admin\SettingController::show/$1');
+            $routes->post('/', 'Api\Admin\SettingController::create');
+        });
+    });
+});
 /*
  * --------------------------------------------------------------------
  * Additional Routing

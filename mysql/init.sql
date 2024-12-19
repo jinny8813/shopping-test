@@ -1,0 +1,3 @@
+-- 給予用戶所有權限
+GRANT ALL PRIVILEGES ON *.* TO 'devuser'@'%' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
