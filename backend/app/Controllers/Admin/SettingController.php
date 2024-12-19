@@ -22,6 +22,75 @@ class SettingController extends BaseAdminController
         $this->session = session();
     }
 
+    // 設定列表
+    public function index()
+    {
+        try {
+            // 獲取查詢參數
+            $type = $this->request->getGet('type');
+            $status = $this->request->getGet('status');
+            $page = $this->request->getGet('page') ?? 1;
+            $limit = $this->request->getGet('limit') ?? 10;
+            
+            // 建立查詢
+            $query = $this->settingModel->select('
+                settings.*, 
+                GROUP_CONCAT(media.file_path) as image_paths,
+                GROUP_CONCAT(media.media_id) as media_ids
+            ')
+            ->join('media', 'media.related_id = settings.setting_id AND media.related_type = "setting"', 'left')
+            ->groupBy('settings.setting_id');
+
+            // 加入條件篩選
+            if ($type) {
+                $query->where('settings.type', $type);
+            }
+            if ($status) {
+                $query->where('settings.status', $status);
+            }
+
+            // 排序
+            $query->orderBy('settings.sort_order', 'ASC')
+                ->orderBy('settings.created_at', 'DESC');
+
+            // 分頁
+            $total = $query->countAllResults(false);
+            $settings = $query->limit($limit, ($page - 1) * $limit)->find();
+
+            // 處理圖片路徑
+            foreach ($settings as &$setting) {
+                if ($setting['image_paths']) {
+                    $paths = explode(',', $setting['image_paths']);
+                    $mediaIds = explode(',', $setting['media_ids']);
+                    $setting['images'] = array_map(function($path, $id) {
+                        return [
+                            'media_id' => $id,
+                            'url' => base_url($path)
+                        ];
+                    }, $paths, $mediaIds);
+                } else {
+                    $setting['images'] = [];
+                }
+                unset($setting['image_paths']);
+                unset($setting['media_ids']);
+            }
+
+            return $this->successResponse([
+                'settings' => $settings,
+                'pagination' => [
+                    'current_page' => (int)$page,
+                    'total_pages' => ceil($total / $limit),
+                    'total_items' => $total,
+                    'limit' => (int)$limit
+                ]
+            ]);
+
+        } catch (\Exception $e) {
+            log_message('error', '[Settings List] Error: ' . $e->getMessage());
+            return $this->failServer('獲取設定列表失敗');
+        }
+    }
+
     // CKEditor 圖片上傳處理
     public function upload()
     {
@@ -120,6 +189,53 @@ class SettingController extends BaseAdminController
         } catch (\Exception $e) {
             $this->db->transRollback();
             return $this->fail('新增失敗：' . $e->getMessage());
+        }
+    }
+
+    public function show($id = null)
+    {
+        try {
+            if (!$id) {
+                return $this->failValidation('未提供設定 ID');
+            }
+
+            // 獲取設定資料與相關圖片
+            $setting = $this->settingModel->select('
+                settings.*, 
+                GROUP_CONCAT(media.file_path) as image_paths,
+                GROUP_CONCAT(media.media_id) as media_ids
+            ')
+            ->join('media', 'media.related_id = settings.setting_id AND media.related_type = "setting"', 'left')
+            ->groupBy('settings.setting_id')
+            ->find($id);
+
+            if (!$setting) {
+                return $this->failNotFound('設定不存在');
+            }
+
+            // 處理圖片路徑
+            if ($setting['image_paths']) {
+                $paths = explode(',', $setting['image_paths']);
+                $mediaIds = explode(',', $setting['media_ids']);
+                $setting['images'] = array_map(function($path, $id) {
+                    return [
+                        'media_id' => $id,
+                        'url' => base_url($path)
+                    ];
+                }, $paths, $mediaIds);
+            } else {
+                $setting['images'] = [];
+            }
+            unset($setting['image_paths']);
+            unset($setting['media_ids']);
+
+            return $this->successResponse([
+                'setting' => $setting
+            ]);
+
+        } catch (\Exception $e) {
+            log_message('error', '[Setting Detail] Error: ' . $e->getMessage());
+            return $this->failServer('獲取設定詳情失敗');
         }
     }
 
