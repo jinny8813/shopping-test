@@ -36,10 +36,7 @@ class MemberController extends BaseApiController
         unset($member['reset_token']);
         unset($member['reset_token_expires']);
 
-        return $this->successResponse([
-            'status' => true,
-            'data' => $member
-        ], '取得個人資料成功', 200);
+        return $this->successResponse($member, '取得個人資料成功', 200);
     }
 
     /**
@@ -92,14 +89,9 @@ class MemberController extends BaseApiController
         try {
             if (!empty($updateData)) {
                 $this->memberModel->update($userData->m_id, $updateData);
-                return $this->successResponse([
-                    'status' => true,
-                    'message' => '更新成功'
-                ], '更新成功', 200);
+                return $this->successResponse('更新成功', '更新成功', 200);
             }
-            return $this->successResponse([
-                'message' => '沒有要更新的資料'
-            ], '沒有要更新的資料', 200);
+            return $this->successResponse('沒有要更新的資料', '沒有要更新的資料', 200);
         } catch (\Exception $e) {
             return $this->failServer('更新失敗');
         }
@@ -136,10 +128,7 @@ class MemberController extends BaseApiController
                 'm_password' => password_hash($data['new_password'], PASSWORD_DEFAULT)
             ]);
 
-            return $this->successResponse([
-                'status' => true,
-                'message' => '密碼修改成功'
-            ], '密碼修改成功', 200);
+            return $this->successResponse('密碼修改成功', '密碼修改成功', 200);
         } catch (\Exception $e) {
             return $this->failServer('密碼修改失敗');
         }
@@ -165,10 +154,7 @@ class MemberController extends BaseApiController
             // 軟刪除會員資料
             $this->memberModel->delete($userData->m_id);
 
-            return $this->successResponse([
-                'status' => true,
-                'message' => '帳號已註銷'
-            ], '帳號已註銷', 200);
+            return $this->successResponse('帳號已註銷', '帳號已註銷', 200);
         } catch (\Exception $e) {
             return $this->failServer('註銷失敗');
         }
@@ -184,10 +170,7 @@ class MemberController extends BaseApiController
                 'last_login' => date('Y-m-d H:i:s')
             ]);
 
-            return $this->successResponse([
-                'status' => true,
-                'message' => '登出成功'
-            ], '登出成功', 200);
+            return $this->successResponse('登出成功', '登出成功', 200);
         } catch (\Exception $e) {
             return $this->failServer('登出失敗');
         }

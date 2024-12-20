@@ -47,10 +47,7 @@ class AuthController extends BaseApiController
 
         try {
             $this->memberModel->insert($memberData);
-            return $this->successResponse([
-                'status' => true,
-                'message' => '註冊成功'
-            ], '註冊成功', 200);
+            return $this->successResponse('註冊成功', '註冊成功', 200);
         } catch (\Exception $e) {
             return $this->failServer('註冊失敗');
         }
@@ -87,9 +84,7 @@ class AuthController extends BaseApiController
         ]);
 
         return $this->successResponse([
-            'status' => true,
-            'message' => '登入成功',
-            'token' => $token,
+            'jwt_token' => $token,
             'user' => [
                 'm_id' => $member['m_id'],
                 'm_email' => $member['m_email'],
@@ -125,10 +120,7 @@ class AuthController extends BaseApiController
         // 發送重設密碼郵件
         $this->sendResetPasswordEmail($email, $resetToken);
 
-        return $this->successResponse([
-            'status' => true,
-            'message' => '重設密碼連結已發送至您的信箱'
-        ], '重設密碼連結已發送至您的信箱', 200);
+        return $this->successResponse('重設密碼連結已發送至您的信箱', '重設密碼連結已發送至您的信箱', 200);
     }
 
     // 重設密碼
@@ -163,10 +155,7 @@ class AuthController extends BaseApiController
             'reset_token_expires' => null
         ]);
 
-        return $this->successResponse([
-            'status' => true,
-            'message' => '密碼重設成功'
-        ], '密碼重設成功', 200);
+        return $this->successResponse('密碼重設成功', '密碼重設成功', 200);
     }
 
     // 產生 JWT
